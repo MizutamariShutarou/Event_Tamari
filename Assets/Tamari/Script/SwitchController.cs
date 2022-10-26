@@ -1,30 +1,31 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-//using UnityEngine.Events;
+using UnityEngine.Events;
 
 [RequireComponent(typeof(BoxCollider2D))]
 public class SwitchController : MonoBehaviour
 {
-    [SerializeField, Tooltip("手前のドア")] GameObject _flontDoor;
-    [SerializeField, Tooltip("後ろのドア")] GameObject _backDoor;
+    [SerializeField] 
+    private UnityEvent _enterEvent = default;
+    [SerializeField]
+    private UnityEvent _exitEvent = default;
 
-    //[SerializeField] 
-    //private UnityEvent _myEvent = new UnityEvent();
-    void Start()
+    /// <summary>
+    /// スイッチ踏んだ時
+    /// </summary>
+    public void EnterFunc()
     {
-        
+        _enterEvent?.Invoke();
     }
 
-    void Update()
+    /// <summary>
+    /// スイッチから離れた時
+    /// </summary>
+    public void ExitFunc()
     {
-
+        _exitEvent?.Invoke();
     }
-
-    //public void TestFunc()
-    //{
-    //    _myEvent.Invoke();
-    //}
 
     /// <summary>
     /// サンタに踏まれたら扉を開く
@@ -33,7 +34,7 @@ public class SwitchController : MonoBehaviour
     private void OnTriggerEnter2D(Collider2D collision)
     {
         Debug.Log("踏まれたので扉開く");
-
+        EnterFunc();
     }
 
     /// <summary>
@@ -43,5 +44,6 @@ public class SwitchController : MonoBehaviour
     private void OnTriggerExit2D(Collider2D collision)
     {
         Debug.Log("離れたので扉閉める");
+        ExitFunc();
     }
 }
