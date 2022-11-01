@@ -4,12 +4,19 @@ using UnityEngine;
 
 public class DoorScript : MonoBehaviour
 {
+    Animator _doorAnim;
+    private void Start()
+    {
+        _doorAnim = GetComponent<Animator>();
+    }
+
     /// <summary>
     /// ”à‚ªŠJ‚­
     /// </summary>
     public void OpenDoor()
     {
-        gameObject.SetActive(false);
+        _doorAnim.SetBool("DoorAnim", true);
+        _doorAnim.SetFloat("Speed", 1);
     }
 
     /// <summary>
@@ -17,6 +24,7 @@ public class DoorScript : MonoBehaviour
     /// </summary>
     public void CloseDoor()
     {
-        gameObject.SetActive(true);
+        _doorAnim.SetBool("DoorAnim", false);
+        _doorAnim.SetFloat("Speed", -1);
     }
 }

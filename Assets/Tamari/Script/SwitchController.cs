@@ -10,7 +10,7 @@ public class SwitchController : MonoBehaviour
     private UnityEvent _enterEvent = default;
     [SerializeField]
     private UnityEvent _exitEvent = default;
-
+    
     /// <summary>
     /// スイッチ踏んだ時
     /// </summary>
