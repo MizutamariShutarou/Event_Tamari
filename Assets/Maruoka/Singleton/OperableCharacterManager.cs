@@ -1,7 +1,10 @@
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+/// 操作キャラの管理をするシングルトン
+/// </summary>
 public class OperableCharacterManager
 {
     #region Singleton
