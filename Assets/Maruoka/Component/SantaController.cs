@@ -5,29 +5,21 @@ using UnityEngine;
 [RequireComponent(typeof(Rigidbody2D))]
 public class SantaController : MonoBehaviour
 {
-    #region Properties
-    public SantaLifeControl LifeControler => _lifeControler;
-    #endregion
-
     #region Inspector Variables
     [SerializeField]
     private SantaMoveBehavior _mover = default;
     [SerializeField]
     private JumpBehavior _jumper = default;
     [SerializeField]
-    private SantaLifeControl _lifeControler = default;
+    private SantaLifeController _lifeControler = default;
     [SerializeField]
-    private ChangeOperatCharacter _changeOperatCharacter = default;
-    #endregion
-
-    #region Member Variables
-    private SantaStateControl _stateControler = new SantaStateControl();
-    #endregion
-
-    #region Constant
-    #endregion
-
-    #region Events
+    private ChangeOperatCharacter _operatCharacterChanger = default;
+    [SerializeField]
+    private CombineController _combiner = default;
+    [SerializeField]
+    private SantaStateController _stateControler = default;
+    [SerializeField]
+    private SantaAnimationController _animationController = default;
     #endregion
 
     #region Unity Methods
@@ -41,32 +33,30 @@ public class SantaController : MonoBehaviour
     }
     #endregion
 
-    #region Enums
-    #endregion
-
-    #region Public Methods
-    #endregion
-
     #region Private Methods
     private void Init()
     {
         var rb2D = GetComponent<Rigidbody2D>();
         _mover.Init(rb2D);
         _jumper.Init(rb2D, GetComponent<GroundCheck>());
-        _lifeControler.Init(rb2D, _mover);
+        _lifeControler.Init(_mover);
+        _animationController.Init(_stateControler);
     }
     private void Process()
     {
         _mover.Move();
         _jumper.Jump();
+        _operatCharacterChanger.OnChangeOperatCharacter();
+        _combiner.Combine();
+        _stateControler.Update();
+        _animationController.Update();
     }
     #endregion
 
+
+    #region Test
 #if UNITY_EDITOR
-    // テストコード
-    public void OnSantaDamage()
-    {
-        LifeControler.Damage(1, new Vector2(1f, 1f), 10f);
-    }
+    // テストコード群
 #endif
+    #endregion
 }

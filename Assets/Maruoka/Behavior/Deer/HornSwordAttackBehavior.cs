@@ -2,20 +2,27 @@
 using UnityEngine;
 
 [System.Serializable]
-public class HornSwordAttack
+public class HornSwordAttackBehavior
 {
-    #region Properties
-    #endregion
+    [InputName, SerializeField]
+    private string _fireButtonName = default;
+    [SerializeField]
+    private bool _isReadyFire = false;
 
-    #region Member Variables
-    #endregion
+    public void Init()
+    {
 
-    #region Constant
-    #endregion
-
-    #region Private Methods
-    #endregion
-
-    #region Public Methods
-    #endregion
+    }
+    public void OnReadyFire()
+    {
+        _isReadyFire = true;
+    }
+    public void Fire()
+    {
+        if (_isReadyFire &&
+            Input.GetButtonDown(_fireButtonName))
+        {
+            Debug.Log("角ソードで攻撃した");
+        }
+    }
 }

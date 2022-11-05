@@ -5,20 +5,30 @@ using UnityEngine;
 /// 突進攻撃の振る舞いクラス
 /// </summary>
 [System.Serializable]
-public class HornSwordAttackBehavior
+public class RushAttackBehavior
 {
-    #region Properties
-    #endregion
+    [InputName, SerializeField]
+    private string _fireButtonName = default;
 
-    #region Member Variables
-    #endregion
-
-    #region Constant
-    #endregion
-
-    #region Private Methods
-    #endregion
+    [SerializeField]
+    private bool _isReadyFire = false;
 
     #region Public Methods
+    public void Init()
+    {
+
+    }
+    public void OnReadyFire()
+    {
+        _isReadyFire = true;
+    }
+    public void Fire()
+    {
+        if (_isReadyFire &&
+            Input.GetButtonDown(_fireButtonName))
+        {
+            Debug.Log("突進攻撃を開始した");
+        }
+    }
     #endregion
 }

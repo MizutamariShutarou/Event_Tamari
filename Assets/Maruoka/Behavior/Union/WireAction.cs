@@ -4,18 +4,17 @@ using UnityEngine;
 [System.Serializable]
 public class WireAction
 {
-    #region Properties
-    #endregion
+    [InputName, SerializeField]
+    private string _fireButtonName = default;
+    [SerializeField]
+    private bool _isReadyFire = false;
 
-    #region Member Variables
-    #endregion
-
-    #region Constant
-    #endregion
-
-    #region Private Methods
-    #endregion
-
-    #region Public Methods
-    #endregion
+    public void Fire()
+    {
+        if(_isReadyFire &&
+            Input.GetButtonDown(_fireButtonName))
+        {
+            Debug.Log("ワイヤーアクションを実行しました。");
+        }
+    }
 }

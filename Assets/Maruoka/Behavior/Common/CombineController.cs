@@ -2,22 +2,24 @@
 using UnityEngine;
 
 /// <summary>
-/// 合体命令
+/// 合体制御クラス
 /// </summary>
 [System.Serializable]
-public class CombineCommand
+public class CombineController
 {
-    private bool _isCanCombine = false;
-
     [InputName, SerializeField]
     private string _combineButtonName = default;
+
+    [SerializeField]
+    private bool _isReadyCanCombine = false;
 
     /// <summary>
     /// 合体する
     /// </summary>
     public void Combine()
     {
-        if (_isCanCombine && Input.GetButtonDown(_combineButtonName))
+        if (_isReadyCanCombine &&
+            Input.GetButtonDown(_combineButtonName))
         {
             Debug.Log("合体命令が下された。"); // テストコード
             // ここに合体の処理を記述する。
@@ -28,13 +30,13 @@ public class CombineCommand
     /// </summary>
     public void OnPossibleCombine()
     {
-        _isCanCombine = true;
+        _isReadyCanCombine = true;
     }
     /// <summary>
     /// 合体不可能にする
     /// </summary>
     public void OnImpossibleCombine()
     {
-        _isCanCombine = false;
+        _isReadyCanCombine = false;
     }
 }

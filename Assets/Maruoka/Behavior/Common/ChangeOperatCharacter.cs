@@ -2,8 +2,7 @@ using System;
 using UnityEngine;
 
 /// <summary>
-/// 操作キャラを変更する。<br/>
-/// （単独行動時のみ実行可能）
+/// 操作キャラの変更を制御するクラス
 /// </summary>
 [System.Serializable]
 public class ChangeOperatCharacter
@@ -11,9 +10,13 @@ public class ChangeOperatCharacter
     [InputName, SerializeField]
     private string _changeButtonName = default;
 
-    private void OnChangeOperatCharacter()
+    [SerializeField]
+    private bool _isReadyChange = false;
+
+    public void OnChangeOperatCharacter()
     {
-        if (Input.GetButtonDown(_changeButtonName))
+        if (_isReadyChange &&
+            Input.GetButtonDown(_changeButtonName))
         {
             Debug.Log("操作キャラを変更します");
             // ここに操作キャラを変更するコードを記述する。

@@ -6,6 +6,8 @@ using UnityEngine;
 [System.Serializable]
 public class MoveBehavior
 {
+    public Rigidbody2D Rigidbody2D => _rb2D;
+
     [SerializeField]
     protected float _moveSpeed = 1f;
     [InputName, SerializeField]
