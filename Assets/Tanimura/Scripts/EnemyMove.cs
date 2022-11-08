@@ -26,12 +26,13 @@ public class EnemyMove : MonoBehaviour
     }
     private void FixedUpdate()
     {
+        //ˆÚ“®‚Ìˆ—
         _scale = transform.localScale;
         _rb.velocity = new Vector2(_speed*_scaleX, _rb.velocity.y); ;
     }
     bool IsGround()
     {
-        
+        //ray‚ğ”ò‚Î‚µ‚Ä’n–Ê‚©”»’è‚·‚éˆ—
         Vector3 startposition = transform.position + transform.right * -0.3f * _scale.x;
         Vector3 endposition = startposition - transform.up * 2f;
         Debug.DrawLine(startposition, endposition, Color.red);
@@ -39,6 +40,7 @@ public class EnemyMove : MonoBehaviour
     }
     void ChangeScaleX()
     {
+        //Œü‚«”½“]‚Ìˆ—
         _scale = _scale * -1;
         _scaleX = _scaleX * -1;
         gameObject.transform.localScale = _scale;
