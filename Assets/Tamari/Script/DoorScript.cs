@@ -16,7 +16,7 @@ public class DoorScript : MonoBehaviour
     public void OpenDoor()
     {
         _doorAnim.SetBool("DoorAnim", true);
-        _doorAnim.SetFloat("Speed", 1);
+        //_doorAnim.SetFloat("Speed", 1);
     }
 
     /// <summary>
@@ -25,6 +25,6 @@ public class DoorScript : MonoBehaviour
     public void CloseDoor()
     {
         _doorAnim.SetBool("DoorAnim", false);
-        _doorAnim.SetFloat("Speed", -1);
+        //_doorAnim.SetFloat("Speed", -2);
     }
 }

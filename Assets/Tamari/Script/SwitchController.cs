@@ -4,17 +4,12 @@ using UnityEngine;
 using UnityEngine.Events;
 
 [RequireComponent(typeof(BoxCollider2D))]
-public class SwitchController : MonoBehaviour
+public class SwitchController : GimmickBase
 {
-    [SerializeField] 
-    private UnityEvent _enterEvent = default;
-    [SerializeField]
-    private UnityEvent _exitEvent = default;
-    
     /// <summary>
     /// スイッチ踏んだ時
     /// </summary>
-    public void EnterFunc()
+    protected override void EnterFunc()
     {
         _enterEvent?.Invoke();
     }
@@ -22,7 +17,7 @@ public class SwitchController : MonoBehaviour
     /// <summary>
     /// スイッチから離れた時
     /// </summary>
-    public void ExitFunc()
+    protected override void ExitFunc()
     {
         _exitEvent?.Invoke();
     }
