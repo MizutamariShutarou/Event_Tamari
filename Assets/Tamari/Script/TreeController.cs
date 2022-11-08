@@ -1,13 +1,11 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.Events;
 
-[RequireComponent(typeof(BoxCollider2D))]
-public class SwitchController : GimmickBase
+public class TreeController : GimmickBase
 {
-    /// <summary>
-    /// スイッチ踏んだ時
+    // <summary>
+    /// トナカイが木に触れた時
     /// </summary>
     protected override void EnterFunc()
     {
@@ -15,30 +13,37 @@ public class SwitchController : GimmickBase
     }
 
     /// <summary>
-    /// スイッチから離れた時
+    /// トナカイが木から抜けた時
     /// </summary>
     protected override void ExitFunc()
     {
         _exitEvent?.Invoke();
     }
 
+
     /// <summary>
-    /// サンタに踏まれたら扉を開く
+    /// トナカイの突進を受けた時
     /// </summary>
     /// <param name="collision"></param>
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        Debug.Log("踏まれたので扉開く");
-        EnterFunc();
+        if(collision.gameObject.layer == LayerMask.NameToLayer("Deer"))
+        {
+            Debug.Log("突進された");
+            EnterFunc();
+        }
     }
 
     /// <summary>
-    /// サンタが離れたら扉を閉める
+    /// トナカイが突進後、木から抜けた時
     /// </summary>
     /// <param name="collision"></param>
     private void OnTriggerExit2D(Collider2D collision)
     {
-        Debug.Log("離れたので扉閉める");
-        ExitFunc();
+        if (collision.gameObject.layer == LayerMask.NameToLayer("Deer"))
+        {
+            Debug.Log("突進完了");
+            ExitFunc();
+        }
     }
 }
