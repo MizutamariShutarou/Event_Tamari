@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using DG.Tweening;
 
 [RequireComponent(typeof(Rigidbody2D))]
 public class SantaController : MonoBehaviour
@@ -39,8 +40,10 @@ public class SantaController : MonoBehaviour
         var rb2D = GetComponent<Rigidbody2D>();
         _mover.Init(rb2D);
         _jumper.Init(rb2D, GetComponent<GroundCheck>());
+        _stateControler.Init(rb2D);
         _lifeControler.Init(_mover);
         _animationController.Init(_stateControler);
+        
     }
     private void Process()
     {
@@ -52,7 +55,6 @@ public class SantaController : MonoBehaviour
         _animationController.Update();
     }
     #endregion
-
 
     #region Test
 #if UNITY_EDITOR

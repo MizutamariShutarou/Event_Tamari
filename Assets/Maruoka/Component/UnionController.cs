@@ -40,7 +40,9 @@ public class UnionController : MonoBehaviour
     #region Private Methods
     private void Init()
     {
-        _mover.Init(GetComponent<Rigidbody2D>());
+        var rb2D = GetComponent<Rigidbody2D>();
+        _mover.Init(rb2D);
+        _stateController.Init(rb2D);
         _animationController.Init(_stateController);
         _lifeController.Init(_mover);
     }
