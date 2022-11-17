@@ -36,8 +36,14 @@ public class MoveBehavior
         _isMove = true;
         Debug.Log("移動ストップ終了");
     }
+    public void StopMove()
+    {
+        Debug.Log("移動ストップします");
+        _isMove = false;
+    }
     public void ResumeMove()
     {
+        Debug.Log("移動再開します");
         _isMove = true;
     }
 }

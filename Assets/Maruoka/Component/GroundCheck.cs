@@ -13,6 +13,9 @@ public class GroundCheck : MonoBehaviour
     [SerializeField]
     private Color _debugColor = Color.red;
 
+    public bool IsGrounded => _isGrounded;
+    private bool _isGrounded = false;
+
     private void OnDrawGizmosSelected()
     {
         Gizmos.color = _debugColor;
@@ -20,7 +23,11 @@ public class GroundCheck : MonoBehaviour
             transform.position + _offset,
             _size);
     }
-    public bool IsGround()
+    private void Update()
+    {
+        _isGrounded = IsGround();
+    }
+    private bool IsGround()
     {
         var colliders = Physics2D.OverlapBoxAll(
             transform.position + _offset,

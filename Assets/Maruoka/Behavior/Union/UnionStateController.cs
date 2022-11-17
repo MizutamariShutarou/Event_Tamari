@@ -7,5 +7,6 @@ public class UnionStateController : StateControllerBase<UnionState>
     public override void Update()
     {
         // ここにステートを更新する処理を記述する。
+        FacingDirectionUpdate();
     }
 }

@@ -20,7 +20,7 @@ public class JumpBehavior
     }
     public void Jump()
     {
-        if (Input.GetButtonDown(_jumpButtonName) && _groundChecker.IsGround())
+        if (Input.GetButtonDown(_jumpButtonName) && _groundChecker.IsGrounded)
         {
             _rb2D.velocity = new Vector2(0f, _jumpPower);
         }

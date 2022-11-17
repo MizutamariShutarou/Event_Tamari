@@ -48,7 +48,10 @@ public class HornSwordAttackBehavior
         }
     }
     /// <summary>
-    /// 攻撃処理
+    /// 攻撃処理 : <br/>
+    /// アニメーションイベントから呼び出すことを想定して作成したが、<br/>
+    /// 現在はテスト段階の為、「実行可能かどうか表す変数がtrueである」ことと、<br/>
+    /// 「実行ボタンが押されたとき」に実行する。
     /// </summary>
     public void AttackProcessing()
     {
@@ -61,7 +64,7 @@ public class HornSwordAttackBehavior
 
         var collisions = Physics2D.OverlapBoxAll(pos, _attackAreaSize, 0.0f, _targetLayer);
 
-        foreach(var e in collisions)
+        foreach (var e in collisions)
         {
             Debug.Log($"\"{e.name}\"に攻撃した");
             //if(e.TryGetComponent(out EnemyController enemy))

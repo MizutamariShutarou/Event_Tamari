@@ -12,7 +12,7 @@ public class DeerController : MonoBehaviour
     [SerializeField]
     private RushAttackBehavior _rushAttacker = default;
     [SerializeField]
-    private MainLifeController _lifeControler = default;
+    private MainLifeController _lifeController = default;
     [SerializeField]
     private ChangeOperatCharacter _operatCharacterChanger = default;
     [SerializeField]
@@ -49,7 +49,7 @@ public class DeerController : MonoBehaviour
         _stateController.Init(rb2D);
         _hornSwordAttacker.Init(transform, _stateController);
         _rushAttacker.Init(transform, _stateController, rb2D);
-        _lifeControler.Init(_mover);
+        _lifeController.Init(_mover);
         _animationController.Init(_stateController);
     }
     private void Process()
@@ -61,9 +61,7 @@ public class DeerController : MonoBehaviour
         _combiner.Combine();
         _stateController.Update();
         _animationController.Update();
-
     }
-
     private void OnReadyFire()
     {
 
@@ -118,5 +116,13 @@ public class DeerController : MonoBehaviour
         _rushAttacker.StartRush();
     }
 #endif
+    #endregion
+
+    #region Test
+    // テストコード群
+    public void TestDamage()
+    {
+        _lifeController.Damage(1, new Vector2(1, 1), 10f, 1000);
+    }
     #endregion
 }

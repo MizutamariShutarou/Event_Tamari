@@ -12,7 +12,7 @@ public class SantaController : MonoBehaviour
     [SerializeField]
     private JumpBehavior _jumper = default;
     [SerializeField]
-    private SantaLifeController _lifeControler = default;
+    private SantaLifeController _lifeController = default;
     [SerializeField]
     private ChangeOperatCharacter _operatCharacterChanger = default;
     [SerializeField]
@@ -41,9 +41,9 @@ public class SantaController : MonoBehaviour
         _mover.Init(rb2D);
         _jumper.Init(rb2D, GetComponent<GroundCheck>());
         _stateControler.Init(rb2D);
-        _lifeControler.Init(_mover);
+        _lifeController.Init(_mover);
         _animationController.Init(_stateControler);
-        
+
     }
     private void Process()
     {
@@ -59,6 +59,10 @@ public class SantaController : MonoBehaviour
     #region Test
 #if UNITY_EDITOR
     // テストコード群
+    public void TestDamage()
+    {
+        _lifeController.Damage(1, new Vector2(1, 1), 10f);
+    }
 #endif
     #endregion
 }
