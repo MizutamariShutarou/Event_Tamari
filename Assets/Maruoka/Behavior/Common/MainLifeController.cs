@@ -1,9 +1,16 @@
 using System;
+using System.Threading;
+using System.Threading.Tasks;
 using UnityEngine;
 
 [System.Serializable]
 public class MainLifeController
 {
+    [SerializeField]
+    private bool _isGodMode = false;
+    [SerializeField]
+    private int _knockBackTime = 1000;
+
     private static int _life = CommonConstant.MAX_LIFE;
 
     public static int MainLife => _life; 
@@ -24,18 +31,29 @@ public class MainLifeController
         _life = CommonConstant.MAX_LIFE;
     }
 
-    public void Damage(int damage, Vector2 dir, float power)
+    public void Damage(int damage, Vector2 dir, float power, int moveStopTime)
     {
-        _life -= damage;
-        if (_life < 0)
+        if (!_isGodMode)
         {
-            Debug.LogWarning("Playerが倒されました");
-            _isDeath = true;
-        }
+            StartKnockBack();
+            _life -= damage;
+            if (_life < 0)
+            {
+                Debug.LogWarning("Playerが倒されました");
+                _isDeath = true;
+            }
 
-        // ノックバックする
-        _rb2D.velocity = Vector2.zero;
-        _rb2D.AddForce(dir.normalized * power, ForceMode2D.Impulse);
-        _mover.StopMove(1000);
+            // ノックバックする
+            _rb2D.velocity = Vector2.zero;
+            _rb2D.AddForce(dir.normalized * power, ForceMode2D.Impulse);
+            _mover.StopMove(moveStopTime);
+        }
+    }
+
+    private async void StartKnockBack()
+    {
+        _isGodMode = true;
+        await Task.Run(() => Thread.Sleep(_knockBackTime));
+        _isGodMode = false;
     }
 }

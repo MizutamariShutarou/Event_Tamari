@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using DG.Tweening;
 
 [RequireComponent(typeof(Rigidbody2D))]
 public class SantaController : MonoBehaviour
@@ -11,7 +12,7 @@ public class SantaController : MonoBehaviour
     [SerializeField]
     private JumpBehavior _jumper = default;
     [SerializeField]
-    private SantaLifeController _lifeControler = default;
+    private SantaLifeController _lifeController = default;
     [SerializeField]
     private ChangeOperatCharacter _operatCharacterChanger = default;
     [SerializeField]
@@ -39,8 +40,10 @@ public class SantaController : MonoBehaviour
         var rb2D = GetComponent<Rigidbody2D>();
         _mover.Init(rb2D);
         _jumper.Init(rb2D, GetComponent<GroundCheck>());
-        _lifeControler.Init(_mover);
+        _stateControler.Init(rb2D);
+        _lifeController.Init(_mover);
         _animationController.Init(_stateControler);
+
     }
     private void Process()
     {
@@ -53,10 +56,13 @@ public class SantaController : MonoBehaviour
     }
     #endregion
 
-
     #region Test
 #if UNITY_EDITOR
     // テストコード群
+    public void TestDamage()
+    {
+        _lifeController.Damage(1, new Vector2(1, 1), 10f);
+    }
 #endif
     #endregion
 }
