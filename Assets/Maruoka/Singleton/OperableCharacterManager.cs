@@ -23,89 +23,81 @@ public class OperableCharacterManager
     private OperableCharacterManager() { }
     #endregion
 
+    // Hierarchyにいる操作可能キャラクター一覧
+    // この変数群にアクセスしてキャラクターの切り替えを制御する。
+    private GameObject _santa = null;
+    private GameObject _deer = null;
+    private GameObject _union = null;
+
+    // 各キャラクターのプレハブを持つクラス
+    private AssetsProvider _assets = null;
+
+    public void SetUnion(GameObject union) { _union = union; }
+    public void SetAssetsProvider(AssetsProvider assets) { _assets = assets; }
+
     /// <summary>
-    /// 現在操作しているキャラクター
+    /// 操作キャラクター（サンタとトナカイ）を切り替える
     /// </summary>
-    private OperableCharacter _nowOperableCharacter = OperableCharacter.NOT_SET;
-
-    public void ChangeOperableCharacter(OperableCharacter oc)
+    /// <param name="newer"> これから操作するキャラクターを表す値 </param>
+    public void SwapSantaAndDeer(OperableCharacter newer)
     {
-        if (oc != _nowOperableCharacter)
-        {
-            var beforeOperableCharacter = _nowOperableCharacter;
-            _nowOperableCharacter = oc;
+        if (newer == OperableCharacter.SANTA)
+        { // これから操作するキャラクターがサンタの場合の処理
 
-            // 以下の処理は似たような処理が多いので、
-            // 後でまとめられるところはまとめる。
-            // 「一旦動くように書く。」
-            switch (oc)
-            {
-                case OperableCharacter.NOT_SET:
-                    Debug.Log("値を設定してください");
-                    break;
-                case OperableCharacter.SANTA:
-                    ChangeSantaEnter();
-                    break;
-                case OperableCharacter.DEER:
-                    ChangeDeerEnter();
-                    break;
-                case OperableCharacter.UNION:
-                    ChangeUnionEnter();
-                    break;
-                default:
-                    Debug.Log("不正な値です！修正してください");
-                    break;
-            }
+            // トナカイの更新を停止する
+            _deer.GetComponent<DeerController>().enabled = false;
+            // サンタの更新を再開する
+            _santa.GetComponent<SantaController>().enabled = true;
+            // カメラのターゲットを「サンタ」に設定する
+            _assets.CinemachineVirtualCamera.Follow = _santa.transform;
+        }
+        else if (newer == OperableCharacter.DEER)
+        { // これから操作するキャラクターがトナカイの場合
 
-            switch (beforeOperableCharacter)
-            {
-                case OperableCharacter.NOT_SET:
-                    Debug.LogWarning("異常かもしれない");
-                    break;
-                case OperableCharacter.SANTA:
-                    ChangeSantaExit();
-                    break;
-                case OperableCharacter.DEER:
-                    ChangeDeerExit();
-                    break;
-                case OperableCharacter.UNION:
-                    ChangeUnionExit();
-                    break;
-                default:
-                    Debug.LogError("不正な値です！修正してください");
-                    break;
-            }
+            // サンタの更新を停止する
+            _santa.GetComponent<SantaController>().enabled = false;
+            // トナカイの更新を再開する
+            _deer.GetComponent<DeerController>().enabled = true;
+            // カメラのターゲットを「トナカイ」に設定する
+            _assets.CinemachineVirtualCamera.Follow = _deer.transform;
         }
         else
         {
-            Debug.LogError("操作キャラクターを変更する必要はありません");
+            Debug.LogError("不正な値です！");
         }
     }
-
-    private void ChangeSantaEnter()
+    /// <summary>
+    /// 「サンタ」と「トナカイ」が「合体」する
+    /// </summary>
+    public void Coalesce()
     {
-        Debug.Log("操作キャラを「サンタ」に変更します");
+        // 後で使う値を保存しておく
+        var instantiatePos = (_santa.transform.position + _deer.transform.position) / 2f;
+        // 「サンタ」と「トナカイ」をデストロイする
+        GameObject.Destroy(_santa);
+        GameObject.Destroy(_deer);
+        // 「サンタ」と「トナカイ」がいるポジションの真ん中に
+        // 「合体」をインスタンシエイトする。戻り値は保存しておく。
+        _union = GameObject.Instantiate(_assets.UnionPrefab, instantiatePos, Quaternion.identity);
+        // カメラのターゲットを「合体」にする。
+        _assets.CinemachineVirtualCamera.Follow = _union.transform;
     }
-    private void ChangeDeerEnter()
+    /// <summary>
+    /// 「合体」が「トナカイ」と「サンタ」に分離する。
+    /// </summary>
+    public void Separate()
     {
-        Debug.Log("操作キャラを「トナカイ」に変更します");
-    }
-    private void ChangeUnionEnter()
-    {
-        Debug.Log("操作キャラを「合体」に変更します");
-    }
-
-    private void ChangeSantaExit()
-    {
-        Debug.Log("操作キャラを「サンタ」から変更します");
-    }
-    private void ChangeDeerExit()
-    {
-        Debug.Log("操作キャラを「トナカイ」から変更します");
-    }
-    private void ChangeUnionExit()
-    {
-        Debug.Log("操作キャラを「合体」から変更します");
+        // 「合体」がいた位置に「トナカイ」と「サンタ」を
+        // インスタンシエイトする。戻り値は保存しておく。
+        _santa = GameObject.Instantiate(_assets.SantaPrefab, _union.transform.position, Quaternion.identity);
+        _deer = GameObject.Instantiate(_assets.DeerPrefab, _union.transform.position, Quaternion.identity);
+        // 「合体」をデストロイする
+        GameObject.Destroy(_union);
+        // カメラのターゲットを「サンタ」にする。
+        _assets.CinemachineVirtualCamera.Follow = _santa.transform;
+        // サンタの更新を開始。トナカイの更新を停止する。
+        _santa.GetComponent<SantaController>().enabled = true;
+        _deer.GetComponent<DeerController>().enabled = false;
     }
 }
 

@@ -20,12 +20,16 @@ public class SeparationInstruction
     {
         _isReadySeparation = false;
     }
-
-    public void Execution()
+    public void Init(GameObject union)
+    {
+        OperableCharacterManager.Instance.SetUnion(union);
+    }
+    public void Update()
     {
         if (_isReadySeparation &&
            Input.GetButtonDown(_separationButtonName))
         {
+            OperableCharacterManager.Instance.Separate();
             Debug.Log("分離します");
         }
     }
