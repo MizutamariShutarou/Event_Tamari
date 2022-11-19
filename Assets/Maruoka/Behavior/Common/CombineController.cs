@@ -21,8 +21,8 @@ public class CombineController
         if (_isReadyCanCombine &&
             Input.GetButtonDown(_combineButtonName))
         {
-            Debug.Log("合体命令が下された。"); // テストコード
-            // ここに合体の処理を記述する。
+            Debug.Log("合体命令が下された。");
+            OperableCharacterManager.Instance.Coalesce();
         }
     }
     /// <summary>

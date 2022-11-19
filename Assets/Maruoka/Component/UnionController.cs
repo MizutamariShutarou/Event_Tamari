@@ -53,6 +53,7 @@ public class UnionController : MonoBehaviour
         _shootGun.Init(transform, _stateController);
         _flyingSquirrelActioner.Init(rb2D, _stateController,
             GetComponent<GroundCheck>(), transform, _mover);
+        _separationInstructioner.Init(gameObject);
     }
     private void Process()
     {
@@ -62,7 +63,7 @@ public class UnionController : MonoBehaviour
         _flyingSquirrelActioner.Update();
         _stateController.Update();
         _animationController.Update();
-        _separationInstructioner.Execution();
+        _separationInstructioner.Update();
     }
     #endregion
 
