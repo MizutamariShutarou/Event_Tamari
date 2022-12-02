@@ -15,9 +15,11 @@ public class MainLifeController
 
     public static int MainLife => _life; 
     public bool IsDeath => _isDeath;
+    public bool IsDamage => _isDamage;
 
     private Rigidbody2D _rb2D = default;
     private MoveBehavior _mover = default;
+    private bool _isDamage = false;
     private bool _isDeath = false;
 
     public void Init(MoveBehavior moveController)
@@ -53,7 +55,9 @@ public class MainLifeController
     private async void StartKnockBack()
     {
         _isGodMode = true;
+        _isDamage = true;
         await Task.Run(() => Thread.Sleep(_knockBackTime));
         _isGodMode = false;
+        _isDamage = false;
     }
 }

@@ -7,20 +7,15 @@ public abstract class StateControllerBase<T> where T : Enum
     /// <summary>
     /// 現在のステート
     /// </summary>
-    public T NowState => _nowState;
+    public T CurrentState { get => _currentState; set => _currentState = value; }
     /// <summary>
     /// 向いている方向を表す値
     /// </summary>
     public FacingDirection FacingDirection => _facingDirection;
 
-    protected T _nowState = default;
+    protected T _currentState = default;
     protected FacingDirection _facingDirection = default;
     protected Rigidbody2D _rb2D = default;
-
-    public virtual void Init(Rigidbody2D rb)
-    {
-        _rb2D = rb;
-    }
 
     /// <summary>
     /// ステート更新処理

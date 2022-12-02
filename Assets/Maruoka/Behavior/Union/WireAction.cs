@@ -9,12 +9,21 @@ public class WireAction
     [SerializeField]
     private bool _isReadyFire = false;
 
-    public void Fire()
+    public void Update()
     {
-        if(_isReadyFire &&
-            Input.GetButtonDown(_fireButtonName))
+        if(IsRun())
         {
             Debug.Log("ワイヤーアクションを実行しました。");
         }
+    }
+    private bool IsRun()
+    {
+        bool result = false;
+
+        result = 
+            _isReadyFire &&
+            Input.GetButtonDown(_fireButtonName);
+
+        return result;
     }
 }

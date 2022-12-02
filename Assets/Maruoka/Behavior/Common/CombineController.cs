@@ -9,14 +9,13 @@ public class CombineController
 {
     [InputName, SerializeField]
     private string _combineButtonName = default;
-
     [SerializeField]
     private bool _isReadyCanCombine = false;
 
     /// <summary>
     /// 合体する
     /// </summary>
-    public void Combine()
+    public void Update()
     {
         if (_isReadyCanCombine &&
             Input.GetButtonDown(_combineButtonName))

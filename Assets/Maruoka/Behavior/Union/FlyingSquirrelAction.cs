@@ -107,7 +107,6 @@ public class FlyingSquirrelAction
             }
         }
     }
-
     private async void StartRise()
     {
         _isRiseNow = true;

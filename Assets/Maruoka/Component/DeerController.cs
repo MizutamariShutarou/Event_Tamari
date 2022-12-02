@@ -6,7 +6,7 @@ public class DeerController : MonoBehaviour
 {
     #region Inspector Variables
     [SerializeField]
-    private MoveBehavior _mover = default;
+    private DeerMoveController _mover = default;
     [SerializeField]
     private HornSwordAttackBehavior _hornSwordAttacker = default;
     [SerializeField]
@@ -21,6 +21,15 @@ public class DeerController : MonoBehaviour
     private DeerStateController _stateController = default;
     [SerializeField]
     private DeerAnimationController _animationController = default;
+
+    public DeerMoveController Mover => _mover;
+    public HornSwordAttackBehavior HornSwordAttacker => _hornSwordAttacker;
+    public RushAttackBehavior RushAttacker => _rushAttacker;
+    public MainLifeController LifeController => _lifeController;
+    public ChangeOperatCharacter OperatCharacterChanger => _operatCharacterChanger;
+    public CombineController Combiner => _combiner;
+    public DeerStateController StateController => _stateController;
+    public DeerAnimationController AnimationController => _animationController;
     #endregion
 
     #region Unity Methods
@@ -46,7 +55,7 @@ public class DeerController : MonoBehaviour
     {
         var rb2D = GetComponent<Rigidbody2D>();
         _mover.Init(rb2D);
-        _stateController.Init(rb2D);
+        _stateController.Init(rb2D, GetComponent<GroundCheck>(), this);
         _hornSwordAttacker.Init(transform, _stateController);
         _rushAttacker.Init(transform, _stateController, rb2D);
         _lifeController.Init(_mover);
@@ -54,11 +63,11 @@ public class DeerController : MonoBehaviour
     }
     private void Process()
     {
-        _mover.Move();
-        _hornSwordAttacker.Fire();
+        _mover.Update();
+        _hornSwordAttacker.Update();
         _rushAttacker.Update();
-        _operatCharacterChanger.OnChangeOperatCharacter();
-        _combiner.Combine();
+        _operatCharacterChanger.Update();
+        _combiner.Update();
         _stateController.Update();
         _animationController.Update();
     }

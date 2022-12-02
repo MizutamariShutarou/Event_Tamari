@@ -52,4 +52,14 @@ public class ShootGunBehavior
             }
         }
     }
+    private bool IsRun()
+    {
+        bool result = false;
+
+        result = 
+            _isReadyFire &&
+            Input.GetButtonDown(_fireButtonName);
+
+        return result;
+    }
 }

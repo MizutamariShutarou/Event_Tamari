@@ -14,7 +14,7 @@ public class ChangeOperatCharacter
     [Tooltip("‘Š–_‚Ì–¼‘O"), SerializeField]
     private OperableCharacter _buddyName = OperableCharacter.NOT_SET;
 
-    public void OnChangeOperatCharacter()
+    public void Update()
     {
         if (_isReadyChange &&
             Input.GetButtonDown(_changeButtonName))
