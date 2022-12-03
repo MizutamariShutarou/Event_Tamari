@@ -14,9 +14,9 @@ public class DeerController : MonoBehaviour
     [SerializeField]
     private MainLifeController _lifeController = default;
     [SerializeField]
-    private ChangeOperatCharacter _operatCharacterChanger = default;
+    private DeerChangeOperatCharacter _operatCharacterChanger = default;
     [SerializeField]
-    private CombineController _combiner = default;
+    private DeerCombineController _combiner = default;
     [SerializeField]
     private DeerStateController _stateController = default;
     [SerializeField]
@@ -26,8 +26,8 @@ public class DeerController : MonoBehaviour
     public HornSwordAttackBehavior HornSwordAttacker => _hornSwordAttacker;
     public RushAttackBehavior RushAttacker => _rushAttacker;
     public MainLifeController LifeController => _lifeController;
-    public ChangeOperatCharacter OperatCharacterChanger => _operatCharacterChanger;
-    public CombineController Combiner => _combiner;
+    public DeerChangeOperatCharacter OperatCharacterChanger => _operatCharacterChanger;
+    public DeerCombineController Combiner => _combiner;
     public DeerStateController StateController => _stateController;
     public DeerAnimationController AnimationController => _animationController;
     #endregion
@@ -56,10 +56,12 @@ public class DeerController : MonoBehaviour
         var rb2D = GetComponent<Rigidbody2D>();
         _mover.Init(rb2D);
         _stateController.Init(rb2D, GetComponent<GroundCheck>(), this);
+        _operatCharacterChanger.Init(_stateController);
         _hornSwordAttacker.Init(transform, _stateController);
         _rushAttacker.Init(transform, _stateController, rb2D);
         _lifeController.Init(_mover);
         _animationController.Init(_stateController);
+        _combiner.Init(_stateController);
     }
     private void Process()
     {

@@ -11,7 +11,10 @@ public class RushAttackBehavior
     #region Inspector Variable
     [InputName, SerializeField]
     private string _fireButtonName = default;
-    [Tooltip("突進可能かどうかを表す値 : 確認用"), SerializeField]
+    [Tooltip(
+        "突進可能かどうかを表す値 : " +
+        "インスペクタウィンドウで確認する用の値")]
+    [SerializeField]
     private bool _isReadyFire = false;
 
     [Header("当たり判定関連")]

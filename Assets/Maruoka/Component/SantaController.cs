@@ -14,9 +14,9 @@ public class SantaController : MonoBehaviour
     [SerializeField]
     private SantaLifeController _lifeController = default;
     [SerializeField]
-    private ChangeOperatCharacter _operatCharacterChanger = default;
+    private SantaChangeOperatCharacter _operatCharacterChanger = default;
     [SerializeField]
-    private CombineController _combiner = default;
+    private SantaCombineController _combiner = default;
     [SerializeField]
     private SantaStateController _stateControler = default;
     [SerializeField]
@@ -25,8 +25,8 @@ public class SantaController : MonoBehaviour
     public SantaMoveBehavior Mover => _mover;
     public JumpBehavior Jumper => _jumper;
     public SantaLifeController LifeController => _lifeController;
-    public ChangeOperatCharacter OperatCharacterChanger => _operatCharacterChanger;
-    public CombineController Combiner => _combiner;
+    public SantaChangeOperatCharacter OperatCharacterChanger => _operatCharacterChanger;
+    public SantaCombineController Combiner => _combiner;
     public SantaStateController StateControler => _stateControler;
     public SantaAnimationController AnimationController => _animationController;
     #endregion
@@ -48,11 +48,12 @@ public class SantaController : MonoBehaviour
         var rb2D = GetComponent<Rigidbody2D>();
         var gc = GetComponent<GroundCheck>();
         _mover.Init(rb2D);
-        _jumper.Init(rb2D, gc);
-        _stateControler.Init(rb2D, gc,this);
+        _jumper.Init(rb2D, gc, _stateControler);
+        _operatCharacterChanger.Init(_stateControler);
+        _stateControler.Init(rb2D, gc, this);
         _lifeController.Init(_mover);
         _animationController.Init(_stateControler);
-
+        _combiner.Init(_stateControler);
     }
     private void Process()
     {

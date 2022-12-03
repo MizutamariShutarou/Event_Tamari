@@ -65,35 +65,34 @@ public class FlyingSquirrelAction
         UpdateRise();
         UpdateFlyingSquirrel();
     }
-
+    /// <summary>
+    /// 上昇処理の制御処理
+    /// </summary>
     private void UpdateRise()
     {
-        // アクション可能かつ、地上で入力が発生したときの処理。
-        if (_isReadyFire &&
-            Input.GetButtonDown(_fireButtonName) &&
-            _groundChecker.IsGrounded)
+        // 上昇開始
+        if (IsRiseStart())
         {
-            // 上昇開始
             StartRise();
         }
+        // 上昇処理
         if (_isRiseNow)
         {
-            // 上昇処理
             _rigidbody2D.velocity = Vector2.up * _risePower;
         }
     }
+    /// <summary>
+    /// ムササビ行動の制御処理
+    /// </summary>
     private void UpdateFlyingSquirrel()
     {
-        // 条件が多くなってしまった。
-        // 関数化する？なんかいいアイデア求む。
-        if (_isReadyFire && !_isRiseNow && !_isFlyingSquirrelNow &&
-            Input.GetButtonDown(_fireButtonName) &&
-            !_groundChecker.IsGrounded)
+        // ムササビ処理開始
+        if (IsFlyingSquirrelStart())
         {
             StartFlyingSquirrel();
         }
-        else if (_isFlyingSquirrelNow && (_groundChecker.IsGrounded ||
-            Input.GetButtonUp(_fireButtonName)))
+        // ムササビ処理終了
+        else if (IsFlyingSquirrelEnd())
         {
             EndFlyingSquirrel();
         }
@@ -107,6 +106,9 @@ public class FlyingSquirrelAction
             }
         }
     }
+    /// <summary>
+    /// 上昇処理
+    /// </summary>
     private async void StartRise()
     {
         _isRiseNow = true;
@@ -118,6 +120,9 @@ public class FlyingSquirrelAction
             StartFlyingSquirrel();
         }
     }
+    /// <summary>
+    /// ムササビ行動開始処理
+    /// </summary>
     private void StartFlyingSquirrel()
     {
         _isFlyingSquirrelNow = true;
@@ -129,7 +134,9 @@ public class FlyingSquirrelAction
         // 移動処理を停止する。
         _mover.StopMove();
     }
-
+    /// <summary>
+    /// ムササビ行動終了処理
+    /// </summary>
     private void EndFlyingSquirrel()
     {
         _isFlyingSquirrelNow = false;
@@ -139,6 +146,47 @@ public class FlyingSquirrelAction
         _rigidbody2D.velocity = Vector2.zero;
         // 移動処理を再開する。
         _mover.ResumeMove();
+    }
+    private bool IsRiseStart()
+    {
+        bool result = false;
+
+        result = _isReadyFire &&
+            !_isRiseNow &&
+            !_isFlyingSquirrelNow &&
+            Input.GetButtonDown(_fireButtonName) &&
+            !_groundChecker.IsGrounded &&
+            (_stateController.CurrentState == UnionState.IDLE ||
+            _stateController.CurrentState == UnionState.MOVE);
+
+        return result;
+    }
+    private bool IsFlyingSquirrelStart()
+    {
+        // ムササビの処理を実行できるかどうかの判定を行う処理をここに記述する。
+        bool result = false;
+
+        result =
+            _isReadyFire &&
+            !_isRiseNow &&
+            !_isFlyingSquirrelNow &&
+            Input.GetButtonDown(_fireButtonName) &&
+            !_groundChecker.IsGrounded &&
+            (_stateController.CurrentState == UnionState.FLY_UP ||
+            _stateController.CurrentState == UnionState.FALL_DOWN);
+
+        return result;
+    }
+    private bool IsFlyingSquirrelEnd()
+    {
+        bool result = false;
+
+        result =
+            _isFlyingSquirrelNow &&
+            (_groundChecker.IsGrounded ||
+            Input.GetButtonUp(_fireButtonName));
+
+        return result;
     }
     private bool ForwardCheck()
     {

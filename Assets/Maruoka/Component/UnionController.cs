@@ -63,7 +63,8 @@ public class UnionController : MonoBehaviour
         _shootGun.Init(transform, _stateController);
         _flyingSquirrelActioner.Init(rb2D, _stateController,
             gc, transform, _mover);
-        _separationInstructioner.Init(gameObject);
+        _separationInstructioner.Init(gameObject, _stateController);
+        _wireActioner.Init(_stateController);
     }
     private void Process()
     {
