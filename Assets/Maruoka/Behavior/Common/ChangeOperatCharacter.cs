@@ -8,20 +8,26 @@ using UnityEngine;
 public class ChangeOperatCharacter
 {
     [InputName, SerializeField]
-    private string _changeButtonName = default;
+    protected string _changeButtonName = default;
     [SerializeField]
     private bool _isReadyChange = false;
     [Tooltip("相棒の名前"), SerializeField]
     private OperableCharacter _buddyName = OperableCharacter.NOT_SET;
 
-    public void OnChangeOperatCharacter()
+    public void Update()
     {
-        if (_isReadyChange &&
-            Input.GetButtonDown(_changeButtonName))
+        if (IsRun())
         {
             Debug.Log("操作キャラを変更します");
             // ここに操作キャラを変更するコードを記述する。
             OperableCharacterManager.Instance.SwapSantaAndDeer(_buddyName);
         }
+    }
+
+    protected virtual bool IsRun()
+    {
+        // _isReadyChange &&
+        //     Input.GetButtonDown(_changeButtonName)
+        return false;
     }
 }

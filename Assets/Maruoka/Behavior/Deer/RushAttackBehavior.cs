@@ -11,7 +11,10 @@ public class RushAttackBehavior
     #region Inspector Variable
     [InputName, SerializeField]
     private string _fireButtonName = default;
-    [Tooltip("突進可能かどうかを表す値"), SerializeField]
+    [Tooltip(
+        "突進可能かどうかを表す値 : " +
+        "インスペクタウィンドウで確認する用の値")]
+    [SerializeField]
     private bool _isReadyFire = false;
 
     [Header("当たり判定関連")]
@@ -42,6 +45,7 @@ public class RushAttackBehavior
     public Vector3 HitboxSize => _hitboxSize;
     public bool IsDrawGizmo => _isDrawGizmo;
     public Color GizmoColor => _gizmoColor;
+    public bool IsRushNow => _isRushNow;
     #endregion
 
     #region Member Variable
@@ -67,8 +71,7 @@ public class RushAttackBehavior
     }
     public void Update()
     {
-        if (_isReadyFire &&
-            Input.GetButtonDown(_fireButtonName))
+        if (IsRun())
         {
             StartRush();
         }
@@ -77,6 +80,19 @@ public class RushAttackBehavior
     #endregion
 
     #region Private Methods
+    private bool IsRun()
+    {
+        bool result = false;
+
+        result =
+            Input.GetButtonDown(_fireButtonName) &&
+            (_stateController.CurrentState == DeerState.IDLE ||
+            _stateController.CurrentState == DeerState.MOVE);
+
+        _isReadyFire = result;
+
+        return result;
+    }
     /// <summary>
     /// ヒット処理
     /// </summary>

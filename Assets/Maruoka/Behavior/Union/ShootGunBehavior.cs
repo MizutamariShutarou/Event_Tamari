@@ -32,8 +32,7 @@ public class ShootGunBehavior
 
     public void Update()
     {
-        if (_isReadyFire &&
-            Input.GetButtonDown(_fireButtonName))
+        if (IsRun())
         {
             Debug.Log("銃を発砲しました");
             // 前方にレイを飛ばす
@@ -51,5 +50,16 @@ public class ShootGunBehavior
                 // enemy.Damage();
             }
         }
+    }
+    private bool IsRun()
+    {
+        bool result = false;
+
+        result =
+            Input.GetButtonDown(_fireButtonName) &&
+            (_stateController.CurrentState == UnionState.IDLE ||
+            _stateController.CurrentState == UnionState.MOVE);
+
+        return result;
     }
 }

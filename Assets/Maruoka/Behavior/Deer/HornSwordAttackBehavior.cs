@@ -25,9 +25,11 @@ public class HornSwordAttackBehavior
     public LayerMask TargetLayer => _targetLayer;
     public bool IsDrawGizmo => _isDrawGizmo;
     public Color GizmoColor => _attackGizmoColor;
+    public bool IsAttackNow => _isAttackNow;
 
     private Transform _transform = default;
     private DeerStateController _stateController = default;
+    private bool _isAttackNow = false;
 
     public void Init(Transform transform, DeerStateController stateController)
     {
@@ -38,14 +40,24 @@ public class HornSwordAttackBehavior
     {
         _isReadyFire = true;
     }
-    public void Fire()
+    public void Update()
     {
-        if (_isReadyFire &&
-            Input.GetButtonDown(_fireButtonName))
+        if (IsRun())
         {
             Debug.Log("角ソードで攻撃した");
             AttackProcessing();
         }
+    }
+    private bool IsRun()
+    {
+        bool result = false;
+
+        result =
+            Input.GetButtonDown(_fireButtonName) &&
+            (_stateController.CurrentState == DeerState.IDLE ||
+            _stateController.CurrentState == DeerState.MOVE);
+
+        return result;
     }
     /// <summary>
     /// 攻撃処理 : <br/>

@@ -9,7 +9,7 @@ public enum UnionState
     FLY_UP,
     FALL_DOWN,
     DAMAGE,
-    DETH,
+    DEATH,
 
     /// <summary> ƒTƒ“ƒ^‚ð“Š‚°‚é </summary>
     THROW_SANTA,

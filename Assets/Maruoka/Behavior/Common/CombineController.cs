@@ -8,22 +8,24 @@ using UnityEngine;
 public class CombineController
 {
     [InputName, SerializeField]
-    private string _combineButtonName = default;
-
+    protected string _combineButtonName = default;
     [SerializeField]
     private bool _isReadyCanCombine = false;
 
     /// <summary>
     /// 合体する
     /// </summary>
-    public void Combine()
+    public void Update()
     {
-        if (_isReadyCanCombine &&
-            Input.GetButtonDown(_combineButtonName))
+        if (IsRun())
         {
             Debug.Log("合体命令が下された。");
             OperableCharacterManager.Instance.Coalesce();
         }
+    }
+    protected virtual bool IsRun()
+    {
+        return false;
     }
     /// <summary>
     /// 合体可能にする

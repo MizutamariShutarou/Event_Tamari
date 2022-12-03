@@ -36,27 +36,27 @@ public class OperableCharacterManager
     public void SetAssetsProvider(AssetsProvider assets) { _assets = assets; }
 
     /// <summary>
-    /// 操作キャラクター（サンタとトナカイ）を切り替える
+    /// 操作キャラクター（「サンタ」と「トナカイ」）を切り替える
     /// </summary>
     /// <param name="newer"> これから操作するキャラクターを表す値 </param>
     public void SwapSantaAndDeer(OperableCharacter newer)
     {
         if (newer == OperableCharacter.SANTA)
-        { // これから操作するキャラクターがサンタの場合の処理
+        { // これから操作するキャラクターが「サンタ」の場合の処理
 
-            // トナカイの更新を停止する
+            // 「トナカイ」の更新を停止する
             _deer.GetComponent<DeerController>().enabled = false;
-            // サンタの更新を再開する
+            // 「サンタ」の更新を再開する
             _santa.GetComponent<SantaController>().enabled = true;
             // カメラのターゲットを「サンタ」に設定する
             _assets.CinemachineVirtualCamera.Follow = _santa.transform;
         }
         else if (newer == OperableCharacter.DEER)
-        { // これから操作するキャラクターがトナカイの場合
+        { // これから操作するキャラクターが「トナカイ」の場合
 
-            // サンタの更新を停止する
+            // 「サンタ」の更新を停止する
             _santa.GetComponent<SantaController>().enabled = false;
-            // トナカイの更新を再開する
+            // 「トナカイ」の更新を再開する
             _deer.GetComponent<DeerController>().enabled = true;
             // カメラのターゲットを「トナカイ」に設定する
             _assets.CinemachineVirtualCamera.Follow = _deer.transform;
@@ -95,7 +95,7 @@ public class OperableCharacterManager
         GameObject.Destroy(_union);
         // カメラのターゲットを「サンタ」にする。
         _assets.CinemachineVirtualCamera.Follow = _santa.transform;
-        // サンタの更新を開始。トナカイの更新を停止する。
+        // 「サンタ」の更新を開始。「トナカイ」の更新を停止する。
         _santa.GetComponent<SantaController>().enabled = true;
         _deer.GetComponent<DeerController>().enabled = false;
     }
