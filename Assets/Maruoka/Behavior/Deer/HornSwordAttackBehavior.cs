@@ -67,6 +67,8 @@ public class HornSwordAttackBehavior
     /// </summary>
     public void AttackProcessing()
     {
+        _stateController.CurrentState = DeerState.HORN_SWORD_ATTACK;
+
         var pos = AttackPosOffset;
         if (_stateController.FacingDirection == FacingDirection.LEFT)
         {

@@ -6,7 +6,7 @@ public class UnionController : MonoBehaviour
 {
     #region Inspector Variables
     [SerializeField]
-    private MainLifeController _lifeController = default;
+    private UnionMainLifeController _lifeController = default;
     [SerializeField]
     private UnionMoveController _mover = default;
     [SerializeField]
@@ -59,7 +59,7 @@ public class UnionController : MonoBehaviour
         _mover.Init(rb2D);
         _stateController.Init(rb2D, gc, this);
         _animationController.Init(_stateController);
-        _lifeController.Init(_mover);
+        _lifeController.Init(_mover,_stateController);
         _shootGun.Init(transform, _stateController);
         _flyingSquirrelActioner.Init(rb2D, _stateController,
             gc, transform, _mover);

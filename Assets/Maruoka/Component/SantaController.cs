@@ -51,7 +51,7 @@ public class SantaController : MonoBehaviour
         _jumper.Init(rb2D, gc, _stateControler);
         _operatCharacterChanger.Init(_stateControler);
         _stateControler.Init(rb2D, gc, this);
-        _lifeController.Init(_mover);
+        _lifeController.Init(_mover, _stateControler);
         _animationController.Init(_stateControler);
         _combiner.Init(_stateControler);
     }
