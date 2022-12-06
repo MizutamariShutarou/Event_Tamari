@@ -29,6 +29,7 @@ public class JumpBehavior
         {
             _rb2D.velocity = new Vector2(0f, _jumpPower);
             _isJump = true;
+            _stateController.CurrentState = SantaState.JUMP;
         }
         else
         {

@@ -32,7 +32,13 @@ public class FlyingSquirrelAction
     [SerializeField]
     private Color _gizmoColor = Color.red;
 
+    /// <summary>
+    /// ムササビ状態（上昇モード）中かどうかを表す値
+    /// </summary>
     public bool IsRiseNow => _isRiseNow;
+    /// <summary>
+    /// ムササビ状態（滑空モード）中かどうかを表す値
+    /// </summary>
     public bool IsFlyingSquirrelNow => _isFlyingSquirrelNow;
     public Vector3 ForwardCheckOffset => _forwardCheckOffset;
     public Vector3 ForwardCheckSize => _forwardCheckSize;
@@ -107,11 +113,12 @@ public class FlyingSquirrelAction
         }
     }
     /// <summary>
-    /// 上昇処理
+    /// ムササビ状態 上昇処理
     /// </summary>
     private async void StartRise()
     {
         _isRiseNow = true;
+        _stateController.CurrentState = UnionState.FLYING_SQUIRREL_SANTA_FLY_UP;
         await Task.Run(() => Thread.Sleep(_riseTime));
         _isRiseNow = false;
         if (Input.GetButton(_fireButtonName) &&
@@ -121,11 +128,12 @@ public class FlyingSquirrelAction
         }
     }
     /// <summary>
-    /// ムササビ行動開始処理
+    /// ムササビ状態 滑空開始処理
     /// </summary>
     private void StartFlyingSquirrel()
     {
         _isFlyingSquirrelNow = true;
+        _stateController.CurrentState = UnionState.FLYING_SQUIRREL_SANTA_NOMAL;
         // 重力を0にする。
         _rigidbody2D.gravityScale = 0f;
         // 指定の方向に進む

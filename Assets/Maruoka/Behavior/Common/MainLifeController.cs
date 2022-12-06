@@ -13,7 +13,7 @@ public class MainLifeController
 
     private static int _life = CommonConstant.MAX_LIFE;
 
-    public static int MainLife => _life; 
+    public static int MainLife => _life;
     public bool IsDeath => _isDeath;
     public bool IsDamage => _isDamage;
 
@@ -22,7 +22,7 @@ public class MainLifeController
     private bool _isDamage = false;
     private bool _isDeath = false;
 
-    public void Init(MoveBehavior moveController)
+    protected void Init(MoveBehavior moveController)
     {
         _mover = moveController;
         _rb2D = _mover.Rigidbody2D;
@@ -38,11 +38,16 @@ public class MainLifeController
         if (!_isGodMode)
         {
             StartKnockBack();
-            _life -= damage;
             if (_life < 0)
             {
                 Debug.LogWarning("Playerが倒されました");
+                StateUpdateOnDamage();
                 _isDeath = true;
+            }
+            else
+            {
+                StateUpdateOnDeath();
+                _life -= damage;
             }
 
             // ノックバックする
@@ -51,7 +56,14 @@ public class MainLifeController
             _mover.StopMove(moveStopTime);
         }
     }
+    protected virtual void StateUpdateOnDeath()
+    {
 
+    }
+    protected virtual void StateUpdateOnDamage()
+    {
+
+    }
     private async void StartKnockBack()
     {
         _isGodMode = true;

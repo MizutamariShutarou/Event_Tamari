@@ -65,10 +65,6 @@ public class RushAttackBehavior
         _stateController = stateController;
         _rigidbody2D = rb2D;
     }
-    public void OnReadyFire()
-    {
-        _isReadyFire = true;
-    }
     public void Update()
     {
         if (IsRun())
@@ -133,6 +129,7 @@ public class RushAttackBehavior
         if (!_isRushNow)
         {
             _isRushNow = true;
+            _stateController.CurrentState = DeerState.RUSH_ATTACK;
             Debug.Log("突進します！");
             // 向いている方向に突進する
             var dir = _stateController.FacingDirection == FacingDirection.RIGHT ? 1f : -1f;
@@ -164,9 +161,13 @@ public class RushAttackBehavior
             // DoTweenをキルし、OnComplete()を実行する。
             if (HitProcess())
             {
-                _rushSpeedController.Kill(true);
+                RushFinish();
             }
         }
+    }
+    public void RushFinish()
+    {
+        _rushSpeedController?.Kill(true);
     }
     #endregion
 }

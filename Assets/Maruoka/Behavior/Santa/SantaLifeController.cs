@@ -19,6 +19,7 @@ public class SantaLifeController
 
     private Rigidbody2D _rb2D = default;
     private MoveBehavior _mover = default;
+    private SantaStateController _stateController = null;
 
     private bool _isDamageNow = false;
     private bool _isDeath = false;
@@ -26,11 +27,12 @@ public class SantaLifeController
     public bool IsDamageNow => _isDamageNow;
     public bool IsDeath => _isDeath;
 
-    public void Init(MoveBehavior moveController)
+    public void Init(MoveBehavior moveController, SantaStateController stateController)
     {
         _mover = moveController;
         _rb2D = _mover.Rigidbody2D;
         _life = _maxLife;
+        _stateController = stateController;
     }
 
     public void Damage(int damage, Vector2 dir, float power)
@@ -61,6 +63,7 @@ public class SantaLifeController
     {
         _isGodMode = true;
         _isDamageNow = true;
+        _stateController.CurrentState = SantaState.DAMAGE;
         _mover.StopMove();
 
         await Task.Run(() => Thread.Sleep(_knockBackTime));
@@ -72,6 +75,7 @@ public class SantaLifeController
     private async void StartDeath()
     {
         Debug.Log("倒されました");
+        _stateController.CurrentState = SantaState.DEATH;
         _isDeath = true;
         _isGodMode = true;
         _mover.StopMove();

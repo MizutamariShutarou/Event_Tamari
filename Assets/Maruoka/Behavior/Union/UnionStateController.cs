@@ -52,9 +52,17 @@ public class UnionStateController : StateControllerBase<UnionState>
         {
             _currentState = UnionState.DEATH;
         }
-
+        // ムササビサンタ（上昇モード）
+        if (_controller.FlyingSquirrelActioner.IsRiseNow)
+        {
+            _currentState = UnionState.FLYING_SQUIRREL_SANTA_FLY_UP;
+        }
+        // ムササビサンタ（滑空モード）
+        if (_controller.FlyingSquirrelActioner.IsFlyingSquirrelNow)
+        {
+            _currentState = UnionState.FLYING_SQUIRREL_SANTA_NOMAL;
+        }
         // サンタを投げる（ワイヤーアクション開始）
-        // ムササビサンタ（ムササビアクション状態）
         // サンタガード（サンタガード状態）
         // 銃を発砲する（銃発砲状態）
     }

@@ -12,7 +12,7 @@ public class DeerController : MonoBehaviour
     [SerializeField]
     private RushAttackBehavior _rushAttacker = default;
     [SerializeField]
-    private MainLifeController _lifeController = default;
+    private DeerMainLifeController _lifeController = default;
     [SerializeField]
     private DeerChangeOperatCharacter _operatCharacterChanger = default;
     [SerializeField]
@@ -59,7 +59,7 @@ public class DeerController : MonoBehaviour
         _operatCharacterChanger.Init(_stateController);
         _hornSwordAttacker.Init(transform, _stateController);
         _rushAttacker.Init(transform, _stateController, rb2D);
-        _lifeController.Init(_mover);
+        _lifeController.Init(_mover, _stateController);
         _animationController.Init(_stateController);
         _combiner.Init(_stateController);
     }
