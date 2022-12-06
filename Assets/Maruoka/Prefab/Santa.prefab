@@ -177,15 +177,16 @@ MonoBehaviour:
     _moveSpeed: 15
     _horizontalButtonName: Horizontal
     _crawlingSpeed: 0.5
+    _isRun: 0
   _jumper:
     _jumpPower: 8
     _jumpButtonName: Jump
+    _isReady: 0
   _lifeController:
     _maxLife: 1
     _life: 1
     _isGodMode: 0
     _knockBackTime: 1000
-    _isDeath: 0
     _deathTime: 3000
   _operatCharacterChanger:
     _changeButtonName: Fire1
@@ -194,6 +195,8 @@ MonoBehaviour:
   _combiner:
     _combineButtonName: Fire2
     _isReadyCanCombine: 0
+  _stateControler:
+    _currentState: 0
 --- !u!50 &3805936245956139283
 Rigidbody2D:
   serializedVersion: 4
@@ -227,7 +230,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b4ec99d5300b3c94e8615507232540c6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _offset: {x: 0, y: -0.5, z: 0}
+  _offset: {x: 0, y: -1.38, z: 0}
   _size: {x: 0.7, y: 0.5}
   _groundLayer:
     serializedVersion: 2

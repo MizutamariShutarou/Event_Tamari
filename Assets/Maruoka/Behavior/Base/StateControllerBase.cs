@@ -13,6 +13,7 @@ public abstract class StateControllerBase<T> where T : Enum
     /// </summary>
     public FacingDirection FacingDirection => _facingDirection;
 
+    [SerializeField]
     protected T _currentState = default;
     protected FacingDirection _facingDirection = default;
     protected Rigidbody2D _rb2D = default;

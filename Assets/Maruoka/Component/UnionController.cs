@@ -22,7 +22,7 @@ public class UnionController : MonoBehaviour
     [SerializeField]
     private UnionAnimationController _animationController = default;
 
-    public MainLifeController LifeController => _lifeController;
+    public UnionMainLifeController LifeController => _lifeController;
     public UnionMoveController Mover => _mover;
     public WireAction WireActioner => _wireActioner;
     public FlyingSquirrelAction FlyingSquirrelActioner => _flyingSquirrelActioner;

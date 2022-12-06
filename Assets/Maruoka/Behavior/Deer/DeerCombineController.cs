@@ -16,10 +16,10 @@ public class DeerCombineController : CombineController
         bool result = false;
 
         result =
-             Input.GetButtonDown(_combineButtonName) &&
              (_stateController.CurrentState == DeerState.IDLE ||
              _stateController.CurrentState == DeerState.MOVE);
+        _isReadyCanCombine = result;
 
-        return result;
+        return result && Input.GetButtonDown(_combineButtonName);
     }
 }

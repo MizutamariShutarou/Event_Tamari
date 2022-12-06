@@ -47,7 +47,7 @@ public class SantaController : MonoBehaviour
     {
         var rb2D = GetComponent<Rigidbody2D>();
         var gc = GetComponent<GroundCheck>();
-        _mover.Init(rb2D);
+        _mover.Init(rb2D, _stateControler);
         _jumper.Init(rb2D, gc, _stateControler);
         _operatCharacterChanger.Init(_stateControler);
         _stateControler.Init(rb2D, gc, this);

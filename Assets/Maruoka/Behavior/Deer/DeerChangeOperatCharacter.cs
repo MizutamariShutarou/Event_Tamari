@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+[System.Serializable]
 public class DeerChangeOperatCharacter : ChangeOperatCharacter
 {
     private DeerStateController _stateController = null;
@@ -16,10 +17,11 @@ public class DeerChangeOperatCharacter : ChangeOperatCharacter
         bool result = false;
 
         result =
-          Input.GetButtonDown(_changeButtonName) &&
           (_stateController.CurrentState == DeerState.IDLE ||
           _stateController.CurrentState == DeerState.MOVE);
 
-        return result;
+        _isReadyChange = result;
+
+        return result && Input.GetButtonDown(_changeButtonName);
     }
 }

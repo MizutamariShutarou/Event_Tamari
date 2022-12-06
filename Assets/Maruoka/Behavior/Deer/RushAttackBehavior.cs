@@ -23,6 +23,8 @@ public class RushAttackBehavior
     [SerializeField]
     private Vector3 _hitboxSize = default;
     [SerializeField]
+    private LayerMask _targetLayer = default;
+    [SerializeField]
     private bool _isDrawGizmo = false;
     [SerializeField]
     private Color _gizmoColor = Color.red;
@@ -81,13 +83,12 @@ public class RushAttackBehavior
         bool result = false;
 
         result =
-            Input.GetButtonDown(_fireButtonName) &&
             (_stateController.CurrentState == DeerState.IDLE ||
             _stateController.CurrentState == DeerState.MOVE);
 
         _isReadyFire = result;
 
-        return result;
+        return result && Input.GetButtonDown(_fireButtonName);
     }
     /// <summary>
     /// ヒット処理
@@ -105,7 +106,7 @@ public class RushAttackBehavior
         }
         pos += _transform.position;
 
-        var collisions = Physics2D.OverlapBoxAll(pos, _hitboxSize, 0.0f);
+        var collisions = Physics2D.OverlapBoxAll(pos, _hitboxSize, 0.0f, _targetLayer);
 
         foreach (var e in collisions)
         {
@@ -167,6 +168,7 @@ public class RushAttackBehavior
     }
     public void RushFinish()
     {
+        Debug.LogWarning("DOTweenをキルします");
         _rushSpeedController?.Kill(true);
     }
     #endregion

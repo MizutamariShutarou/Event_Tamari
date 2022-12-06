@@ -8,6 +8,8 @@ public class JumpBehavior
     private float _jumpPower = 1f;
     [InputName, SerializeField]
     private string _jumpButtonName = default;
+    [SerializeField]
+    private bool _isReady = false;
 
     private Rigidbody2D _rb2D = null;
     private GroundCheck _groundChecker = null;
@@ -25,7 +27,7 @@ public class JumpBehavior
     }
     public void Update()
     {
-        if (Input.GetButtonDown(_jumpButtonName) && _groundChecker.IsGrounded)
+        if (IsRun())
         {
             _rb2D.velocity = new Vector2(0f, _jumpPower);
             _isJump = true;
@@ -41,11 +43,12 @@ public class JumpBehavior
         bool result = false;
 
         result =
-            Input.GetButtonDown(_jumpButtonName) &&
             _groundChecker.IsGrounded &&
             (_stateController.CurrentState == SantaState.IDLE ||
             _stateController.CurrentState == SantaState.MOVE);
 
-        return result;
+        _isReady = result;
+
+        return result && Input.GetButtonDown(_jumpButtonName);
     }
 }

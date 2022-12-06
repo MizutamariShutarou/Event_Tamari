@@ -40,10 +40,10 @@ public class SeparationInstruction
         bool result = false;
 
         result =
-            Input.GetButtonDown(_separationButtonName) &&
             (_stateController.CurrentState == UnionState.IDLE ||
             _stateController.CurrentState == UnionState.MOVE);
+        _isReadySeparation = result;
 
-        return result;
+        return result && Input.GetButtonDown(_separationButtonName);
     }
 }

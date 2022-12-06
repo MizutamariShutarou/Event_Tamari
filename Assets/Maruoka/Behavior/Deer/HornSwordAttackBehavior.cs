@@ -7,7 +7,7 @@ public class HornSwordAttackBehavior
     [InputName, SerializeField]
     private string _fireButtonName = default;
     [SerializeField]
-    private bool _isReadyFire = false;
+    private bool _isReady = false;
 
     [SerializeField]
     private Vector3 _attackPosOffset = default;
@@ -36,10 +36,6 @@ public class HornSwordAttackBehavior
         _transform = transform;
         _stateController = stateController;
     }
-    public void OnReadyFire()
-    {
-        _isReadyFire = true;
-    }
     public void Update()
     {
         if (IsRun())
@@ -53,11 +49,11 @@ public class HornSwordAttackBehavior
         bool result = false;
 
         result =
-            Input.GetButtonDown(_fireButtonName) &&
             (_stateController.CurrentState == DeerState.IDLE ||
             _stateController.CurrentState == DeerState.MOVE);
+        _isReady = result;
 
-        return result;
+        return result && Input.GetButtonDown(_fireButtonName);
     }
     /// <summary>
     /// 攻撃処理 : <br/>

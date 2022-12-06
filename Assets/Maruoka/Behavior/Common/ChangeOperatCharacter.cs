@@ -10,7 +10,7 @@ public class ChangeOperatCharacter
     [InputName, SerializeField]
     protected string _changeButtonName = default;
     [SerializeField]
-    private bool _isReadyChange = false;
+    protected bool _isReadyChange = false;
     [Tooltip("‘Š–_‚Ì–¼‘O"), SerializeField]
     private OperableCharacter _buddyName = OperableCharacter.NOT_SET;
 

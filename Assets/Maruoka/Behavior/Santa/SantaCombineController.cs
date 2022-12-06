@@ -16,10 +16,11 @@ public class SantaCombineController : CombineController
         bool result = false;
 
         result =
-             Input.GetButtonDown(_combineButtonName) &&
              (_stateController.CurrentState == SantaState.IDLE ||
              _stateController.CurrentState == SantaState.MOVE);
 
-        return result;
+        _isReadyCanCombine = result;
+
+        return result && Input.GetButtonDown(_combineButtonName);
     }
 }
