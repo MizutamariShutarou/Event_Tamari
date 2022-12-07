@@ -36,7 +36,7 @@ public class GameManager : MonoBehaviour
     }
     void Start()
     {
-        
+        StageCount();   
     }
 
     /// <summary>
@@ -47,6 +47,22 @@ public class GameManager : MonoBehaviour
     {
         SceneManager.LoadScene(sceneNum);
         Debug.Log($"{sceneNum}シーンをロードしました");
+    }
+
+    /// <summary>
+    /// ゲームオーバーシーンを読み込む
+    /// </summary>
+    public void GameOver()
+    {
+        _beforeSceneNum = SceneManager.GetActiveScene().buildIndex;
+    }
+
+    /// <summary>
+    /// ゲームのリトライ
+    /// </summary>
+    private void RetryGame()
+    {
+        SceneManager.LoadScene(_beforeSceneNum);
     }
 
     void StageCount()

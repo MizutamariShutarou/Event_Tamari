@@ -8,13 +8,29 @@ public class WireAction
     private string _fireButtonName = default;
     [SerializeField]
     private bool _isReadyFire = false;
+    UnionStateController _stateController = null;
 
-    public void Fire()
+    public void Init(UnionStateController stateController)
     {
-        if(_isReadyFire &&
-            Input.GetButtonDown(_fireButtonName))
+        _stateController = stateController;
+    }
+
+    public void Update()
+    {
+        if (IsRun())
         {
             Debug.Log("ワイヤーアクションを実行しました。");
         }
+    }
+    private bool IsRun()
+    {
+        bool result = false;
+
+        result =
+            Input.GetButtonDown(_fireButtonName) &&
+            (_stateController.CurrentState == UnionState.IDLE ||
+            _stateController.CurrentState == UnionState.MOVE);
+
+        return result;
     }
 }

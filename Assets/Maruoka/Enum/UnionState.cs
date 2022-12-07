@@ -9,12 +9,14 @@ public enum UnionState
     FLY_UP,
     FALL_DOWN,
     DAMAGE,
-    DETH,
+    DEATH,
 
     /// <summary> サンタを投げる </summary>
     THROW_SANTA,
-    /// <summary> ムササビサンタ </summary>
-    FLYING_SQUIRREL_SANTA,
+    /// <summary> ムササビサンタ（上昇モード） </summary>
+    FLYING_SQUIRREL_SANTA_FLY_UP,
+    /// <summary> ムササビサンタ（滑空モード） </summary>
+    FLYING_SQUIRREL_SANTA_NOMAL,
     /// <summary> サンタガード </summary>
     SANTA_GUARD,
     /// <summary> 銃を発砲する </summary>

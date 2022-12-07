@@ -10,6 +10,7 @@ public enum SantaState
     FLY_UP,
     FALL_DOWN,
     DAMAGE,
+    DEATH,
 
     /// <summary> ™³™´Idle </summary>
     CREEPING_IDLE,

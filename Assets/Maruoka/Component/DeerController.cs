@@ -6,21 +6,30 @@ public class DeerController : MonoBehaviour
 {
     #region Inspector Variables
     [SerializeField]
-    private MoveBehavior _mover = default;
+    private DeerMoveController _mover = default;
     [SerializeField]
     private HornSwordAttackBehavior _hornSwordAttacker = default;
     [SerializeField]
     private RushAttackBehavior _rushAttacker = default;
     [SerializeField]
-    private MainLifeController _lifeController = default;
+    private DeerMainLifeController _lifeController = default;
     [SerializeField]
-    private ChangeOperatCharacter _operatCharacterChanger = default;
+    private DeerChangeOperatCharacter _operatCharacterChanger = default;
     [SerializeField]
-    private CombineController _combiner = default;
+    private DeerCombineController _combiner = default;
     [SerializeField]
     private DeerStateController _stateController = default;
     [SerializeField]
     private DeerAnimationController _animationController = default;
+
+    public DeerMoveController Mover => _mover;
+    public HornSwordAttackBehavior HornSwordAttacker => _hornSwordAttacker;
+    public RushAttackBehavior RushAttacker => _rushAttacker;
+    public MainLifeController LifeController => _lifeController;
+    public DeerChangeOperatCharacter OperatCharacterChanger => _operatCharacterChanger;
+    public DeerCombineController Combiner => _combiner;
+    public DeerStateController StateController => _stateController;
+    public DeerAnimationController AnimationController => _animationController;
     #endregion
 
     #region Unity Methods
@@ -46,19 +55,21 @@ public class DeerController : MonoBehaviour
     {
         var rb2D = GetComponent<Rigidbody2D>();
         _mover.Init(rb2D);
-        _stateController.Init(rb2D);
+        _stateController.Init(rb2D, GetComponent<GroundCheck>(), this);
+        _operatCharacterChanger.Init(_stateController);
         _hornSwordAttacker.Init(transform, _stateController);
         _rushAttacker.Init(transform, _stateController, rb2D);
-        _lifeController.Init(_mover);
+        _lifeController.Init(_mover, _stateController);
         _animationController.Init(_stateController);
+        _combiner.Init(_stateController);
     }
     private void Process()
     {
-        _mover.Move();
-        _hornSwordAttacker.Fire();
+        _mover.Update();
+        _hornSwordAttacker.Update();
         _rushAttacker.Update();
-        _operatCharacterChanger.OnChangeOperatCharacter();
-        _combiner.Combine();
+        _operatCharacterChanger.Update();
+        _combiner.Update();
         _stateController.Update();
         _animationController.Update();
     }

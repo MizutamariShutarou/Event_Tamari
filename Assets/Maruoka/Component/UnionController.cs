@@ -6,9 +6,9 @@ public class UnionController : MonoBehaviour
 {
     #region Inspector Variables
     [SerializeField]
-    private MainLifeController _lifeController = default;
+    private UnionMainLifeController _lifeController = default;
     [SerializeField]
-    private MoveBehavior _mover = default;
+    private UnionMoveController _mover = default;
     [SerializeField]
     private WireAction _wireActioner = default;
     [SerializeField]
@@ -21,6 +21,15 @@ public class UnionController : MonoBehaviour
     private UnionStateController _stateController = default;
     [SerializeField]
     private UnionAnimationController _animationController = default;
+
+    public MainLifeController LifeController => _lifeController;
+    public UnionMoveController Mover => _mover;
+    public WireAction WireActioner => _wireActioner;
+    public FlyingSquirrelAction FlyingSquirrelActioner => _flyingSquirrelActioner;
+    public ShootGunBehavior ShootGun => _shootGun;
+    public SeparationInstruction SeparationInstructioner => _separationInstructioner;
+    public UnionStateController StateController => _stateController;
+    public UnionAnimationController AnimationController => _animationController;
     #endregion
 
     #region Member Variables
@@ -46,23 +55,26 @@ public class UnionController : MonoBehaviour
     private void Init()
     {
         var rb2D = GetComponent<Rigidbody2D>();
+        var gc = GetComponent<GroundCheck>();
         _mover.Init(rb2D);
-        _stateController.Init(rb2D);
+        _stateController.Init(rb2D, gc, this);
         _animationController.Init(_stateController);
-        _lifeController.Init(_mover);
+        _lifeController.Init(_mover,_stateController);
         _shootGun.Init(transform, _stateController);
         _flyingSquirrelActioner.Init(rb2D, _stateController,
-            GetComponent<GroundCheck>(), transform, _mover);
+            gc, transform, _mover);
+        _separationInstructioner.Init(gameObject, _stateController);
+        _wireActioner.Init(_stateController);
     }
     private void Process()
     {
-        _mover.Move();
-        _wireActioner.Fire();
+        _mover.Update();
+        _wireActioner.Update();
         _shootGun.Update();
         _flyingSquirrelActioner.Update();
         _stateController.Update();
         _animationController.Update();
-        _separationInstructioner.Execution();
+        _separationInstructioner.Update();
     }
     #endregion
 

@@ -20,13 +20,21 @@ public class MoveBehavior
     {
         _rb2D = rb2D;
     }
-    public virtual void Move()
+    public virtual void Update()
     {
         if (_isMove)
         {
             var h = Input.GetAxisRaw(_horizontalButtonName);
             _rb2D.velocity = new Vector2(h * _moveSpeed, _rb2D.velocity.y);
         }
+    }
+    protected virtual bool IsRun()
+    {
+        bool result = false;
+
+
+
+        return result;
     }
     public async void StopMove(int stopTime)
     {

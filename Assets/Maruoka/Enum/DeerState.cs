@@ -9,7 +9,7 @@ public enum DeerState
     FLY_UP,
     FALL_DOWN,
     DAMAGE,
-    DETH,
+    DEATH,
 
     /// <summary> äpÉ\Å[ÉhçUåÇ </summary>
     HORN_SWORD_ATTACK,
