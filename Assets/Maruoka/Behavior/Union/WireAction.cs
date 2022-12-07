@@ -20,6 +20,7 @@ public class WireAction
         if (IsRun())
         {
             Debug.Log("ワイヤーアクションを実行しました。");
+            OperableCharacterManager.Instance.SeparateOnWireAction();
         }
     }
     private bool IsRun()

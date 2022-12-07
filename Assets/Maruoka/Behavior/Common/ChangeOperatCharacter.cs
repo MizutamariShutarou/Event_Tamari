@@ -5,16 +5,16 @@ using UnityEngine;
 /// 操作キャラの変更を制御するクラス
 /// </summary>
 [System.Serializable]
-public class ChangeOperatCharacter
+public abstract class ChangeOperatCharacter
 {
     [InputName, SerializeField]
     protected string _changeButtonName = default;
     [SerializeField]
     protected bool _isReadyChange = false;
     [Tooltip("相棒の名前"), SerializeField]
-    private OperableCharacter _buddyName = OperableCharacter.NOT_SET;
+    protected OperableCharacter _buddyName = OperableCharacter.NOT_SET;
 
-    public void Update()
+    public virtual void Update()
     {
         if (IsRun())
         {
@@ -24,10 +24,5 @@ public class ChangeOperatCharacter
         }
     }
 
-    protected virtual bool IsRun()
-    {
-        // _isReadyChange &&
-        //     Input.GetButtonDown(_changeButtonName)
-        return false;
-    }
+    protected abstract bool IsRun();
 }

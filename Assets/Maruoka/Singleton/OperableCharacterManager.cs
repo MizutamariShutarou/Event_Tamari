@@ -99,6 +99,18 @@ public class OperableCharacterManager
         _santa.GetComponent<SantaController>().enabled = true;
         _deer.GetComponent<DeerController>().enabled = false;
     }
+    /// <summary>
+    /// ワイヤーアクション用分離命令
+    /// </summary>
+    public void SeparateOnWireAction()
+    {
+        Separate();// 通常分離する。
+        //サンタを飛ばす
+        if(_santa.TryGetComponent(out SantaController santaController))
+        {
+            santaController.SantaWireController.Shot();
+        }
+    }
 }
 
 public enum OperableCharacter

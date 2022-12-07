@@ -21,6 +21,8 @@ public class SantaController : MonoBehaviour
     private SantaStateController _stateControler = default;
     [SerializeField]
     private SantaAnimationController _animationController = default;
+    [SerializeField]
+    private SantaWireController _santaWireController = default;
 
     public SantaMoveBehavior Mover => _mover;
     public JumpBehavior Jumper => _jumper;
@@ -29,6 +31,7 @@ public class SantaController : MonoBehaviour
     public SantaCombineController Combiner => _combiner;
     public SantaStateController StateControler => _stateControler;
     public SantaAnimationController AnimationController => _animationController;
+    public SantaWireController SantaWireController => _santaWireController;
     #endregion
 
     #region Unity Methods
