@@ -12,7 +12,9 @@ public abstract class StateControllerBase<T> where T : Enum
     /// 向いている方向を表す値
     /// </summary>
     public FacingDirection FacingDirection => _facingDirection;
+    public Rigidbody2D Rb2D => _rb2D;
 
+    [SerializeField]
     protected T _currentState = default;
     protected FacingDirection _facingDirection = default;
     protected Rigidbody2D _rb2D = default;

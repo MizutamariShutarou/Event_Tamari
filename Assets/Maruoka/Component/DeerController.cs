@@ -25,7 +25,7 @@ public class DeerController : MonoBehaviour
     public DeerMoveController Mover => _mover;
     public HornSwordAttackBehavior HornSwordAttacker => _hornSwordAttacker;
     public RushAttackBehavior RushAttacker => _rushAttacker;
-    public MainLifeController LifeController => _lifeController;
+    public DeerMainLifeController LifeController => _lifeController;
     public DeerChangeOperatCharacter OperatCharacterChanger => _operatCharacterChanger;
     public DeerCombineController Combiner => _combiner;
     public DeerStateController StateController => _stateController;

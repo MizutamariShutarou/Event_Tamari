@@ -194,7 +194,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b4ec99d5300b3c94e8615507232540c6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _offset: {x: 0, y: -0.5, z: 0}
+  _offset: {x: 0, y: -1.28, z: 0}
   _size: {x: 0.7, y: 0.5}
   _groundLayer:
     serializedVersion: 2
@@ -215,9 +215,10 @@ MonoBehaviour:
   _mover:
     _moveSpeed: 3
     _horizontalButtonName: Horizontal
+    _isReady: 0
   _hornSwordAttacker:
     _fireButtonName: Fire1
-    _isReadyFire: 0
+    _isReady: 0
     _attackPosOffset: {x: 1.06, y: 0, z: 0}
     _attackAreaSize: {x: 0.93, y: 0.91, z: 0}
     _targetLayer:
@@ -230,6 +231,9 @@ MonoBehaviour:
     _isReadyFire: 1
     _hitboxAreaOffset: {x: 1.09, y: 0, z: 0}
     _hitboxSize: {x: 0.98, y: 0.64, z: 0.59}
+    _targetLayer:
+      serializedVersion: 2
+      m_Bits: 520
     _isDrawGizmo: 0
     _gizmoColor: {r: 1, g: 0, b: 0, a: 1}
     _maxRushSpeed: 5
@@ -247,6 +251,8 @@ MonoBehaviour:
   _combiner:
     _combineButtonName: Fire2
     _isReadyCanCombine: 0
+  _stateController:
+    _currentState: 0
 --- !u!61 &6425274505885325219
 BoxCollider2D:
   m_ObjectHideFlags: 0

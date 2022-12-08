@@ -10,7 +10,7 @@ public class CombineController
     [InputName, SerializeField]
     protected string _combineButtonName = default;
     [SerializeField]
-    private bool _isReadyCanCombine = false;
+    protected bool _isReadyCanCombine = false;
 
     /// <summary>
     /// 合体する

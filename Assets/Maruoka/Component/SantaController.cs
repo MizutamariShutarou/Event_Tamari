@@ -21,6 +21,8 @@ public class SantaController : MonoBehaviour
     private SantaStateController _stateControler = default;
     [SerializeField]
     private SantaAnimationController _animationController = default;
+    [SerializeField]
+    private SantaWireController _santaWireController = default;
 
     public SantaMoveBehavior Mover => _mover;
     public JumpBehavior Jumper => _jumper;
@@ -29,6 +31,7 @@ public class SantaController : MonoBehaviour
     public SantaCombineController Combiner => _combiner;
     public SantaStateController StateControler => _stateControler;
     public SantaAnimationController AnimationController => _animationController;
+    public SantaWireController SantaWireController => _santaWireController;
     #endregion
 
     #region Unity Methods
@@ -47,7 +50,7 @@ public class SantaController : MonoBehaviour
     {
         var rb2D = GetComponent<Rigidbody2D>();
         var gc = GetComponent<GroundCheck>();
-        _mover.Init(rb2D);
+        _mover.Init(rb2D, _stateControler);
         _jumper.Init(rb2D, gc, _stateControler);
         _operatCharacterChanger.Init(_stateControler);
         _stateControler.Init(rb2D, gc, this);

@@ -121,7 +121,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b4ec99d5300b3c94e8615507232540c6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _offset: {x: 0, y: -0.5, z: 0}
+  _offset: {x: 0, y: -1.4, z: 0}
   _size: {x: 0.7, y: 0.5}
   _groundLayer:
     serializedVersion: 2
@@ -143,14 +143,16 @@ MonoBehaviour:
     _isGodMode: 0
     _knockBackTime: 1000
   _mover:
-    _moveSpeed: 1
+    _moveSpeed: 2
     _horizontalButtonName: Horizontal
+    _isRun: 0
   _wireActioner:
     _fireButtonName: Fire1
     _isReadyFire: 0
   _flyingSquirrelActioner:
     _fireButtonName: Jump
-    _isReadyFire: 0
+    _isReadyFlyUp: 0
+    _isReadyNomal: 0
     _riseTime: 500
     _risePower: 8
     _forwardPropulsion: 2
@@ -172,8 +174,10 @@ MonoBehaviour:
     _isDrawGizmo: 1
     _gizmoColor: {r: 1, g: 0, b: 0, a: 1}
   _separationInstructioner:
-    _separationButtonName: Fire1
+    _separationButtonName: Fire3
     _isReadySeparation: 0
+  _stateController:
+    _currentState: 0
 --- !u!61 &3499471214546290705
 BoxCollider2D:
   m_ObjectHideFlags: 0

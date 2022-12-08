@@ -12,7 +12,9 @@ public class FlyingSquirrelAction
     [InputName, SerializeField]
     private string _fireButtonName = default;
     [SerializeField]
-    private bool _isReadyFire = false;
+    private bool _isReadyFlyUp = false;
+    [SerializeField]
+    private bool _isReadyNomal = false;
     [Tooltip("上昇時間"), SerializeField]
     private int _riseTime = 1000;
     [SerializeField]
@@ -159,31 +161,30 @@ public class FlyingSquirrelAction
     {
         bool result = false;
 
-        result = _isReadyFire &&
+        result =
             !_isRiseNow &&
             !_isFlyingSquirrelNow &&
-            Input.GetButtonDown(_fireButtonName) &&
-            !_groundChecker.IsGrounded &&
+            _groundChecker.IsGrounded &&
             (_stateController.CurrentState == UnionState.IDLE ||
             _stateController.CurrentState == UnionState.MOVE);
 
-        return result;
+        _isReadyFlyUp = result;
+
+        return result && Input.GetButtonDown(_fireButtonName);
     }
     private bool IsFlyingSquirrelStart()
     {
-        // ムササビの処理を実行できるかどうかの判定を行う処理をここに記述する。
         bool result = false;
 
         result =
-            _isReadyFire &&
             !_isRiseNow &&
             !_isFlyingSquirrelNow &&
-            Input.GetButtonDown(_fireButtonName) &&
             !_groundChecker.IsGrounded &&
             (_stateController.CurrentState == UnionState.FLY_UP ||
             _stateController.CurrentState == UnionState.FALL_DOWN);
+        _isReadyNomal = result; // 実行可能かどうかをインスペクタウィンドウに表示する。
 
-        return result;
+        return result && Input.GetButtonDown(_fireButtonName);
     }
     private bool IsFlyingSquirrelEnd()
     {

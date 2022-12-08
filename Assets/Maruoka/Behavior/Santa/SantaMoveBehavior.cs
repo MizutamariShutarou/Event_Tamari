@@ -7,7 +7,9 @@ public class SantaMoveBehavior : MoveBehavior, ICrawlingBehavior
     private bool _isCreepingNow = false;
 
     [SerializeField, Range(0.0f, 1.0f)]
-    float _crawlingSpeed = 0.5f;
+    private float _crawlingSpeed = 0.5f;
+    [SerializeField]
+    private bool _isRun = false;
 
     public bool IsCreeping => _isCreepingNow;
 
@@ -44,7 +46,11 @@ public class SantaMoveBehavior : MoveBehavior, ICrawlingBehavior
 
         result =
             _stateController.CurrentState == SantaState.IDLE ||
-            _stateController.CurrentState == SantaState.MOVE;
+            _stateController.CurrentState == SantaState.MOVE ||
+            _stateController.CurrentState == SantaState.FALL_DOWN ||
+            _stateController.CurrentState == SantaState.FLY_UP;
+
+        _isRun = result;
 
         return result;
     }

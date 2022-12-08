@@ -56,10 +56,11 @@ public class ShootGunBehavior
         bool result = false;
 
         result =
-            Input.GetButtonDown(_fireButtonName) &&
             (_stateController.CurrentState == UnionState.IDLE ||
             _stateController.CurrentState == UnionState.MOVE);
 
-        return result;
+        _isReadyFire = result;
+
+        return result&& Input.GetButtonDown(_fireButtonName);
     }
 }
