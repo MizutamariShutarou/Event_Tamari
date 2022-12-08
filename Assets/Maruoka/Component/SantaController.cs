@@ -1,7 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using DG.Tweening;
 
 [RequireComponent(typeof(Rigidbody2D))]
 public class SantaController : MonoBehaviour
@@ -57,17 +56,43 @@ public class SantaController : MonoBehaviour
         _lifeController.Init(_mover, _stateControler);
         _animationController.Init(_stateControler);
         _combiner.Init(_stateControler);
+        _santaWireController.Init(rb2D, transform, OperableCharacterManager.Instance.Deer.transform,
+            this, OperableCharacterManager.Instance.Deer.GetComponent<DeerController>());
     }
     private void Process()
     {
-        _mover.Update();
-        _jumper.Update();
-        _operatCharacterChanger.Update();
-        _combiner.Update();
-        _stateControler.Update();
-        _animationController.Update();
+        if (_isWire)
+        {
+            _santaWireController.Update();
+        }
+        else
+        {
+            _mover.Update();
+            _jumper.Update();
+            _operatCharacterChanger.Update();
+            _combiner.Update();
+            _stateControler.Update();
+            _animationController.Update();
+        }
+    }
+    private void OnDrawGizmosSelected()
+    {
+        OnDrawGizmo_WireActionFrontCheckBox();
+        OnDrawGizmo_WireActionCliffCheckBox();
     }
     #endregion
+
+    private bool _isWire = false;
+
+    public void StartWire()
+    {
+        _isWire = true;
+    }
+    public void EndWire()
+    {
+        _isWire = false;
+    }
+
 
     #region Test
 #if UNITY_EDITOR
@@ -75,6 +100,32 @@ public class SantaController : MonoBehaviour
     public void TestDamage()
     {
         _lifeController.Damage(1, new Vector2(1, 1), 10f);
+    }
+    /// <summary>
+    /// ワイヤーアクション中 前方チェック（壁とか）
+    /// </summary>
+    private void OnDrawGizmo_WireActionFrontCheckBox()
+    {
+        if (_santaWireController.IsDrawGizmoFrontCheck)
+        {
+            Gizmos.color = Color.white;
+            var pos = _santaWireController.CheckForwardOffset;
+            pos.x *= _stateControler.FacingDirection == FacingDirection.RIGHT ?
+                1f : -1f;
+            pos += transform.position;
+            Gizmos.DrawCube(pos, _santaWireController.CheckForwardSize);
+        }
+    }
+    /// <summary>
+    /// ワイヤーアクション中 崖チェック
+    /// </summary>
+    private void OnDrawGizmo_WireActionCliffCheckBox()
+    {
+        if (_santaWireController.IsDrawGizmoCheckCliff)
+        {
+            Gizmos.color = Color.green;
+            Gizmos.DrawRay(transform.position, _santaWireController.CheckCliffRayDir);
+        }
     }
 #endif
     #endregion

@@ -29,6 +29,9 @@ public class OperableCharacterManager
     private GameObject _deer = null;
     private GameObject _union = null;
 
+    public GameObject Santa => _santa;
+    public GameObject Deer => _deer;
+
     // 各キャラクターのプレハブを持つクラス
     private AssetsProvider _assets = null;
 
@@ -71,7 +74,7 @@ public class OperableCharacterManager
     /// </summary>
     public void Coalesce()
     {
-        // 後で使う値を保存しておく
+        // ポジションを保存しておく
         var instantiatePos = (_santa.transform.position + _deer.transform.position) / 2f;
         // 「サンタ」と「トナカイ」をデストロイする
         GameObject.Destroy(_santa);
@@ -106,10 +109,38 @@ public class OperableCharacterManager
     {
         Separate();// 通常分離する。
         //サンタを飛ばす
-        if(_santa.TryGetComponent(out SantaController santaController))
+        if (_santa.TryGetComponent(out SantaController santaController))
         {
             santaController.SantaWireController.Shot();
         }
+        // トナカイは待機
+        if (_deer.TryGetComponent(out DeerController deerController))
+        {
+            deerController.DeerWireController.Enter();
+        }
+    }
+    /// <summary>
+    /// トナカイのワイヤーステートを変更する
+    /// </summary>
+    public void ChangeDeerWireState(DeerWireState newState)
+    {
+        _deer?.GetComponent<DeerWireController>().ChangeState(newState);
+    }
+    /// <summary>
+    /// サンタの位置で合体する。
+    /// </summary>
+    public void CoalesceOnSantaPos()
+    {
+        // サンタの座標を保存しておく
+        var instantiatePos = _santa.transform.position;
+        // 「サンタ」と「トナカイ」をデストロイする
+        GameObject.Destroy(_santa);
+        GameObject.Destroy(_deer);
+        // 「サンタ」と「トナカイ」がいるポジションの真ん中に
+        // 「合体」をインスタンシエイトする。戻り値は保存しておく。
+        _union = GameObject.Instantiate(_assets.UnionPrefab, instantiatePos, Quaternion.identity);
+        // カメラのターゲットを「合体」にする。
+        _assets.CinemachineVirtualCamera.Follow = _union.transform;
     }
 }
 
