@@ -21,6 +21,8 @@ public class DeerController : MonoBehaviour
     private DeerStateController _stateController = default;
     [SerializeField]
     private DeerAnimationController _animationController = default;
+    [SerializeField]
+    private DeerWireController _deerWireController = default;
 
     public DeerMoveController Mover => _mover;
     public HornSwordAttackBehavior HornSwordAttacker => _hornSwordAttacker;
@@ -30,6 +32,7 @@ public class DeerController : MonoBehaviour
     public DeerCombineController Combiner => _combiner;
     public DeerStateController StateController => _stateController;
     public DeerAnimationController AnimationController => _animationController;
+    public DeerWireController DeerWireController => _deerWireController;
     #endregion
 
     #region Unity Methods
@@ -46,6 +49,7 @@ public class DeerController : MonoBehaviour
     {
         OnDrawGizmo_HornSwordAttackHitBox();
         OnDrawGizmo_RushAttackHitBox();
+        OnDrawGizmo_WireActionFrontCheckBox();
     }
 #endif
     #endregion
@@ -62,22 +66,43 @@ public class DeerController : MonoBehaviour
         _lifeController.Init(_mover, _stateController);
         _animationController.Init(_stateController);
         _combiner.Init(_stateController);
+        _deerWireController.Init(rb2D,
+            OperableCharacterManager.Instance.Santa.transform,transform,this,
+            OperableCharacterManager.Instance.Santa.GetComponent<SantaController>());
     }
     private void Process()
     {
-        _mover.Update();
-        _hornSwordAttacker.Update();
-        _rushAttacker.Update();
-        _operatCharacterChanger.Update();
-        _combiner.Update();
-        _stateController.Update();
-        _animationController.Update();
+        if (_isWire)
+        {
+            _deerWireController.Update();
+        }
+        else
+        {
+            _mover.Update();
+            _hornSwordAttacker.Update();
+            _rushAttacker.Update();
+            _operatCharacterChanger.Update();
+            _combiner.Update();
+            _stateController.Update();
+            _animationController.Update();
+        }
     }
     private void OnReadyFire()
     {
 
     }
     #endregion
+
+    private bool _isWire = false;
+
+    public void StartWire()
+    {
+        _isWire = true;
+    }
+    public void EndWire()
+    {
+        _isWire = false;
+    }
 
     #region Animation Event
     // アニメーションイベントから呼び出すことを想定して作成されたメソッド群
@@ -120,6 +145,19 @@ public class DeerController : MonoBehaviour
             pos += transform.position;
 
             Gizmos.DrawCube(pos, _rushAttacker.HitboxSize);
+        }
+    }
+    private void OnDrawGizmo_WireActionFrontCheckBox()
+    {
+        if (_deerWireController.IsDrawGizmoCheckForward)
+        {
+            Gizmos.color = Color.green;
+
+            var pos = _deerWireController.CheckForwardOffset;
+            pos.x *= _stateController.FacingDirection == FacingDirection.RIGHT ?
+                1f : -1f;
+            pos += transform.position;
+            Gizmos.DrawCube(pos, _deerWireController.CheckForwardSize);
         }
     }
     public void OnRush()

@@ -1910,6 +1910,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Union
       objectReference: {fileID: 0}
+    - target: {fileID: 550196118701477509, guid: b9df3cc305bb830449efeedeb337af27, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 550196118701477511, guid: b9df3cc305bb830449efeedeb337af27, type: 3}
       propertyPath: m_RootOrder
       value: 4
@@ -2015,6 +2019,34 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1742258637341970943, guid: 79b5db98686f1e144809d343d9cfca19, type: 3}
+      propertyPath: _deerWireController._checkForwardSize.x
+      value: 2.26
+      objectReference: {fileID: 0}
+    - target: {fileID: 1742258637341970943, guid: 79b5db98686f1e144809d343d9cfca19, type: 3}
+      propertyPath: _deerWireController._checkForwardSize.y
+      value: 1.07
+      objectReference: {fileID: 0}
+    - target: {fileID: 1742258637341970943, guid: 79b5db98686f1e144809d343d9cfca19, type: 3}
+      propertyPath: _deerWireController._checkForwardSize.z
+      value: 3.44
+      objectReference: {fileID: 0}
+    - target: {fileID: 1742258637341970943, guid: 79b5db98686f1e144809d343d9cfca19, type: 3}
+      propertyPath: _deerWireController._checkForwardOffset.x
+      value: 1.13
+      objectReference: {fileID: 0}
+    - target: {fileID: 1742258637341970943, guid: 79b5db98686f1e144809d343d9cfca19, type: 3}
+      propertyPath: _deerWireController._checkForwardOffset.y
+      value: -0.22
+      objectReference: {fileID: 0}
+    - target: {fileID: 1742258637341970943, guid: 79b5db98686f1e144809d343d9cfca19, type: 3}
+      propertyPath: _deerWireController._checkForwardOffset.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1742258637341970943, guid: 79b5db98686f1e144809d343d9cfca19, type: 3}
+      propertyPath: _deerWireController._isDrawGizmoCheckForward
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 79b5db98686f1e144809d343d9cfca19, type: 3}
 --- !u!1001 &3805936246566271706
@@ -2024,13 +2056,41 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 3805936245956139280, guid: df2cb4255811ae84c9c37e40e22f7b7e, type: 3}
+      propertyPath: _santaWireController._checkCliffRayDir.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3805936245956139280, guid: df2cb4255811ae84c9c37e40e22f7b7e, type: 3}
+      propertyPath: _santaWireController._checkCliffRayDir.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3805936245956139280, guid: df2cb4255811ae84c9c37e40e22f7b7e, type: 3}
+      propertyPath: _santaWireController._checkForwardSize.x
+      value: 1.24
+      objectReference: {fileID: 0}
+    - target: {fileID: 3805936245956139280, guid: df2cb4255811ae84c9c37e40e22f7b7e, type: 3}
+      propertyPath: _santaWireController._checkForwardSize.y
+      value: 1.26
+      objectReference: {fileID: 0}
+    - target: {fileID: 3805936245956139280, guid: df2cb4255811ae84c9c37e40e22f7b7e, type: 3}
+      propertyPath: _santaWireController._checkForwardOffset.x
+      value: 1.47
+      objectReference: {fileID: 0}
+    - target: {fileID: 3805936245956139280, guid: df2cb4255811ae84c9c37e40e22f7b7e, type: 3}
+      propertyPath: _santaWireController._isDrawGizmoCheckCliff
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3805936245956139280, guid: df2cb4255811ae84c9c37e40e22f7b7e, type: 3}
+      propertyPath: _santaWireController._isDrawGizmoForwerdCheck
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 3805936245956139282, guid: df2cb4255811ae84c9c37e40e22f7b7e, type: 3}
       propertyPath: m_Name
       value: Santa
       objectReference: {fileID: 0}
     - target: {fileID: 3805936245956139282, guid: df2cb4255811ae84c9c37e40e22f7b7e, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3805936245956139286, guid: df2cb4255811ae84c9c37e40e22f7b7e, type: 3}
       propertyPath: m_RootOrder
