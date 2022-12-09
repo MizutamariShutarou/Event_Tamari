@@ -105,18 +105,20 @@ public class OperableCharacterManager
     /// <summary>
     /// ワイヤーアクション用分離命令
     /// </summary>
-    public void SeparateOnWireAction()
+    public void SeparateOnWireAction(bool isDirRight)
     {
         Separate();// 通常分離する。
         //サンタを飛ばす
         if (_santa.TryGetComponent(out SantaController santaController))
         {
-            santaController.SantaWireController.Shot();
+            santaController.StartWire();
+            santaController.SantaWireController.Shot(santaController.GetComponent<Rigidbody2D>(), isDirRight);
         }
         // トナカイは待機
         if (_deer.TryGetComponent(out DeerController deerController))
         {
-            deerController.DeerWireController.Enter();
+            deerController.enabled = true;
+            deerController.StartWire();
         }
     }
     /// <summary>
@@ -124,7 +126,7 @@ public class OperableCharacterManager
     /// </summary>
     public void ChangeDeerWireState(DeerWireState newState)
     {
-        _deer?.GetComponent<DeerWireController>().ChangeState(newState);
+        _deer?.GetComponent<DeerController>().DeerWireController.ChangeState(newState);
     }
     /// <summary>
     /// サンタの位置で合体する。
@@ -142,6 +144,33 @@ public class OperableCharacterManager
         // カメラのターゲットを「合体」にする。
         _assets.CinemachineVirtualCamera.Follow = _union.transform;
     }
+    /// <summary>
+    /// カメラのターゲットをトナカイに変更する。
+    /// </summary>
+    public void ChangeTargetToDeer()
+    {
+        if (_deer != null)
+        {
+            _assets.CinemachineVirtualCamera.Follow = _deer.transform;
+        }
+        else
+        {
+            Debug.LogError("その操作はできません！");
+        }
+    }
+    public void ChangeTargetToSanta()
+    {
+
+        if (_santa != null)
+        {
+            _assets.CinemachineVirtualCamera.Follow = _santa.transform;
+        }
+        else
+        {
+            Debug.LogError("その操作はできません！");
+        }
+    }
+
 }
 
 public enum OperableCharacter

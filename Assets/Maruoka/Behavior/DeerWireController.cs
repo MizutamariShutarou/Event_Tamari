@@ -82,11 +82,13 @@ public class DeerWireController
         // サンタとx座標の距離が十分に距離が近くなった時、上昇する。
         if (Mathf.Abs(_santaTransform.position.x - _deerTransform.position.x) < 0.1f)
         {
+            Debug.Log("ワイヤ : トナカイをワイヤー昇るモードにします");
             ChangeState(DeerWireState.CLIMB_TO_SANTA);
         }
         // 前方に壁等の何かがあるとき、単独行動モードに移行する。
         if (CheckForward())
         {
+            Debug.Log("ワイヤ : 単独行動モードにします");
             _deerController.EndWire();
             _santaController.EndWire();
         }
@@ -94,6 +96,7 @@ public class DeerWireController
         if (Mathf.Abs(_santaTransform.position.x - _deerTransform.position.x) < _coalesceDistanceX &&
            Mathf.Abs(_santaTransform.position.y - _deerTransform.position.y) < _coalesceDistanceY)
         {
+            Debug.Log("ワイヤ : 合体します");
             Coalesce();
         }
     }
@@ -112,6 +115,7 @@ public class DeerWireController
     {
         // 上昇する
         _rigidbody2D.velocity = new Vector2(0f, _climbSpeed);
+        // Debug.Log($"{_santaTransform.position.y - _deerTransform.position.y}"); // 高さの差確認用
         // サンタと十分に近ければ合体する。
         if (Mathf.Abs(_santaTransform.position.x - _deerTransform.position.x) < _coalesceDistanceX &&
             Mathf.Abs(_santaTransform.position.y - _deerTransform.position.y) < _coalesceDistanceY)

@@ -71,9 +71,9 @@ public class SantaController : MonoBehaviour
             _jumper.Update();
             _operatCharacterChanger.Update();
             _combiner.Update();
-            _stateControler.Update();
-            _animationController.Update();
         }
+        _stateControler.Update();
+        _animationController.Update();
     }
     private void OnDrawGizmosSelected()
     {
@@ -81,7 +81,7 @@ public class SantaController : MonoBehaviour
         OnDrawGizmo_WireActionCliffCheckBox();
     }
     #endregion
-
+    [SerializeField]
     private bool _isWire = false;
 
     public void StartWire()
@@ -92,7 +92,6 @@ public class SantaController : MonoBehaviour
     {
         _isWire = false;
     }
-
 
     #region Test
 #if UNITY_EDITOR
@@ -124,7 +123,10 @@ public class SantaController : MonoBehaviour
         if (_santaWireController.IsDrawGizmoCheckCliff)
         {
             Gizmos.color = Color.green;
-            Gizmos.DrawRay(transform.position, _santaWireController.CheckCliffRayDir);
+            var dir = _santaWireController.CheckCliffRayDir;
+            dir.x *= _stateControler.FacingDirection == FacingDirection.RIGHT ?
+                1f : -1f;
+            Gizmos.DrawRay(transform.position, dir);
         }
     }
 #endif

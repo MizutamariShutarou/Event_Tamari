@@ -83,16 +83,16 @@ public class DeerController : MonoBehaviour
             _rushAttacker.Update();
             _operatCharacterChanger.Update();
             _combiner.Update();
-            _stateController.Update();
-            _animationController.Update();
         }
+        _stateController.Update();
+        _animationController.Update();
     }
     private void OnReadyFire()
     {
 
     }
     #endregion
-
+    [SerializeField]
     private bool _isWire = false;
 
     public void StartWire()
@@ -101,6 +101,7 @@ public class DeerController : MonoBehaviour
     }
     public void EndWire()
     {
+        this.enabled = false;
         _isWire = false;
     }
 

@@ -189,13 +189,32 @@ MonoBehaviour:
     _knockBackTime: 1000
     _deathTime: 3000
   _operatCharacterChanger:
-    _changeButtonName: Fire1
+    _changeButtonName: Cancel
     _isReadyChange: 0
     _buddyName: 2
   _combiner:
     _combineButtonName: Fire2
     _isReadyCanCombine: 0
   _stateControler:
+    _currentState: 0
+  _santaWireController:
+    _shotDir: {x: 1, y: 3}
+    _shotPower: 15
+    _moveSpeed: 4
+    _checkForwardOffset: {x: 1.47, y: 0, z: 0}
+    _checkForwardSize: {x: 1.24, y: 1.26, z: 0}
+    _checkForwardTargetLayer:
+      serializedVersion: 2
+      m_Bits: 776
+    _isDrawGizmoForwerdCheck: 0
+    _checkCliffRayDir: {x: 2.5, y: -2.5}
+    _checkCliffRayMaxDistance: 3
+    _checkCliffTargetLayer:
+      serializedVersion: 2
+      m_Bits: 8
+    _maxDistanceX: 1
+    _maxDistanceY: 1
+    _isDrawGizmoCheckCliff: 1
     _currentState: 0
 --- !u!50 &3805936245956139283
 Rigidbody2D:

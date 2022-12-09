@@ -20,7 +20,7 @@ public class WireAction
         if (IsRun())
         {
             Debug.Log("ワイヤーアクションを実行しました。");
-            OperableCharacterManager.Instance.SeparateOnWireAction();
+            OperableCharacterManager.Instance.SeparateOnWireAction(_stateController.FacingDirection == FacingDirection.RIGHT);
         }
     }
     private bool IsRun()
