@@ -16,6 +16,7 @@ public class SantaCombineController : CombineController
         bool result = false;
 
         result =
+            _isReadyCanCombine &&
              (_stateController.CurrentState == SantaState.IDLE ||
              _stateController.CurrentState == SantaState.MOVE);
 
