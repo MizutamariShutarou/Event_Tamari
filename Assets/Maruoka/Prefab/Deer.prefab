@@ -245,14 +245,26 @@ MonoBehaviour:
     _isGodMode: 0
     _knockBackTime: 1000
   _operatCharacterChanger:
-    _changeButtonName: Fire1
+    _changeButtonName: Cancel
     _isReadyChange: 0
     _buddyName: 1
   _combiner:
-    _combineButtonName: Fire2
+    _combineButtonName: Fire3
     _isReadyCanCombine: 0
   _stateController:
     _currentState: 0
+  _deerWireController:
+    _moveSpeed: 4
+    _climbSpeed: 4
+    _coalesceDistanceX: 1
+    _coalesceDistanceY: 5
+    _isDrawGizmoCheckForward: 1
+    _checkForwardOffset: {x: 1.13, y: -0.22, z: 0}
+    _checkForwardSize: {x: 2.26, y: 1.07, z: 3.44}
+    _targetLayer:
+      serializedVersion: 2
+      m_Bits: 776
+  _isWire: 0
 --- !u!61 &6425274505885325219
 BoxCollider2D:
   m_ObjectHideFlags: 0

@@ -16,7 +16,7 @@ public class SantaWireController
     [SerializeField]
     private Vector3 _checkForwardSize = default;
     [SerializeField]
-    private LayerMask _targetLayer = default;
+    private LayerMask _checkForwardTargetLayer = default;
     [SerializeField]
     private bool _isDrawGizmoForwerdCheck = false;
     [Tooltip("崖を検知するためのレイの方向"), SerializeField]
@@ -31,7 +31,7 @@ public class SantaWireController
     private float _maxDistanceY = 1f;
     [SerializeField]
     private bool _isDrawGizmoCheckCliff = false;
-
+    [SerializeField]
     private SantaWireState _currentState = SantaWireState.DO_NOTHING;
 
     private Rigidbody2D _rigidbody2D = null;
@@ -74,10 +74,11 @@ public class SantaWireController
         }
     }
     // 発射
-    public void Shot()
+    public void Shot(Rigidbody2D rigidbody2D, bool dirIsRight)
     {
         _currentState = SantaWireState.DO_NOTHING;
-        _rigidbody2D.AddForce(_shotDir.normalized * _shotPower, ForceMode2D.Impulse);
+        _shotDir.x *= dirIsRight ? 1f : -1f;
+        rigidbody2D.AddForce(_shotDir.normalized * _shotPower, ForceMode2D.Impulse);
     }
     // 停止中の処理
     private void DoNothing()
@@ -90,7 +91,7 @@ public class SantaWireController
     // 停止判定
     private bool CheckStop()
     {
-        return _rigidbody2D.velocity.x < 0.1f && _rigidbody2D.velocity.y < 0.1f;
+        return Mathf.Abs(_rigidbody2D.velocity.x) < 0.1f && Mathf.Abs(_rigidbody2D.velocity.y) < 0.1f;
     }
     // にじり寄るモード中の処理
     private void WireMove()
@@ -99,17 +100,20 @@ public class SantaWireController
         var dirX = _deerTransform.position.x > _santaTransform.position.x ?
             1f : -1f;
         // 移動処理
-        _rigidbody2D.velocity = new Vector2(dirX, _rigidbody2D.velocity.y);
+        _rigidbody2D.velocity = new Vector2(dirX * _moveSpeed, _rigidbody2D.velocity.y);
         if (IsCoalesce()) // 引きずられ中にトナカイに接触したとき合体する。
         {
+            Debug.Log("ワイヤー : 合体します");
             StartDeerWireActionMode();
         }
         if (CheckForward()) // 壁を見つけたとき単独行動モードに遷移する
         {
+            Debug.Log("ワイヤー : 単独行動モードに移行します");
             TransitionToNomal();
         }
         if (CheckCliff()) // 崖を見つけたとき停止し、トナカイを近づくモードにする。
         {
+            Debug.Log("ワイヤ : トナカイをワイヤー近づくモードにします");
             TransitionToStop();
             StartDeerWireActionMode();
         }
@@ -122,7 +126,7 @@ public class SantaWireController
             1f : -1f;
         pos += _santaController.transform.position;
         return Physics2D.OverlapBoxAll(pos, _checkForwardSize, 0f,
-            _targetLayer).Length > 0;
+            _checkForwardTargetLayer).Length > 0;
     }
     // 単独行動モード遷移処理
     private void TransitionToNomal()
@@ -130,11 +134,19 @@ public class SantaWireController
         _santaController.EndWire();
         _deerController.EndWire();
     }
-    // 崖検知処理
+    /// <summary>
+    /// 崖検知処理
+    /// </summary>
+    /// <returns> 
+    /// 崖を見つけたとき（レイが何にも当たらなくなったとき）trueを返す。
+    /// </returns>
     private bool CheckCliff()
     {
+        var dir = _checkCliffRayDir;
+        dir.x *= _santaController.StateControler.FacingDirection == FacingDirection.RIGHT ?
+            1f : -1f;
         return !Physics2D.Raycast(_santaTransform.position,
-            _checkCliffRayDir,
+            dir,
             _checkCliffRayMaxDistance,
             _checkCliffTargetLayer);
     }
@@ -152,6 +164,7 @@ public class SantaWireController
     //トナカイ接触判定
     private bool IsCoalesce()
     {
+        // 距離で判定する。
         return (Mathf.Abs(_santaTransform.position.x - _deerTransform.position.x) < _maxDistanceX &&
             Mathf.Abs(_santaTransform.position.y - _deerTransform.position.y) < _maxDistanceY);
     }

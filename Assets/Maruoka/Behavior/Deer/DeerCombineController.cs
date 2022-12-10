@@ -16,6 +16,7 @@ public class DeerCombineController : CombineController
         bool result = false;
 
         result =
+            _isReadyCanCombine &&
              (_stateController.CurrentState == DeerState.IDLE ||
              _stateController.CurrentState == DeerState.MOVE);
         _isReadyCanCombine = result;
