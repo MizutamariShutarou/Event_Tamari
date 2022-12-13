@@ -21,8 +21,10 @@ public enum DeerState
     /// <summary> サンタを手繰り寄せる（空中）（ワイヤーアクション時） </summary>
     HAUL_IN_SANTA_AIR,
 
-    /// <summary> ワイヤーを握った状態で待機（地上）（ワイヤーアクション時） </summary>
-    WAIT_HAUL_IN_SANTA_GROUND,
-    /// <summary> ワイヤーを握った状態で待機（空中）（ワイヤーアクション時） </summary>
-    WAIT_HAUL_IN_SANTA_AIR,
+    /// <summary> ワイヤーアクション : サンタの着地・崖探し待ち </summary>
+    WIRE_DO_NOTHING,
+    /// <summary> ワイヤーアクション : サンタの元まで移動する </summary>
+    WIRE_MOVE,
+    /// <summary> ワイヤーアクション : サンタの元までワイヤーを昇る </summary>
+    WIRE_CLIMB,
 }

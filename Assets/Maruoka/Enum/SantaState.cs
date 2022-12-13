@@ -17,10 +17,12 @@ public enum SantaState
     /// <summary> 匍匐Move </summary>
     CREEPING_MOVE,
 
-    /// <summary> 引きずられる（ワイヤーアクション用） </summary>
-    BE_DRAGGED,
-    /// <summary> 引っかかる（ワイヤーアクション用 </summary>
-    GET_CAUGHT,
+    /// <summary> ワイヤーアクション : 着地待ち </summary>
+    WIRE_DO_NOTHING,
+    /// <summary> ワイヤーアクション : 崖探し中 </summary>
+    WIRE_MOVE,
+    /// <summary> ワイヤーアクション : トナカイ到着待ち </summary>
+    WIRE_STOP_MOVE,
 
     /// <summary> 一時的な死 </summary>
     TEMPORARY_DEATH,
