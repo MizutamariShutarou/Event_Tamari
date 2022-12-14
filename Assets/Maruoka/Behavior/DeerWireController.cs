@@ -31,6 +31,7 @@ public class DeerWireController
     public bool IsDrawGizmoCheckForward => _isDrawGizmoCheckForward;
     public Vector3 CheckForwardOffset => _checkForwardOffset;
     public Vector3 CheckForwardSize => _checkForwardSize;
+    public DeerWireState CurrentState => _currentState;
 
     public void Init(Rigidbody2D rigidbody2D,
         Transform santaTransform,

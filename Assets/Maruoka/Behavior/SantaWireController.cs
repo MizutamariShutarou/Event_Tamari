@@ -40,6 +40,8 @@ public class SantaWireController
     private SantaController _santaController = null;
     private DeerController _deerController = null;
 
+    public SantaWireState CurrentState => _currentState;
+
     public Vector3 CheckForwardOffset => _checkForwardOffset;
     public Vector3 CheckForwardSize => _checkForwardSize;
     public bool IsDrawGizmoFrontCheck => _isDrawGizmoForwerdCheck;
