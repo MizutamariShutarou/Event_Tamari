@@ -88,7 +88,7 @@ GameObject:
   - component: {fileID: 4476209145671595498}
   m_Layer: 6
   m_Name: Santa
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -216,6 +216,7 @@ MonoBehaviour:
     _maxDistanceY: 1
     _isDrawGizmoCheckCliff: 1
     _currentState: 0
+  _isWire: 0
 --- !u!50 &3805936245956139283
 Rigidbody2D:
   serializedVersion: 4

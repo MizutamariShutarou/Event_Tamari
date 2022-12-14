@@ -4,23 +4,15 @@ using UnityEngine;
 
 public class kuriboScript : MonoBehaviour
 {
-
-    // Start is called before the first frame update
-    void Start()
-    {
-
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-
-    }
+    [SerializeField, TagName] string _playerName;
+    [SerializeField] float _bouncePower = 1f;
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        Debug.Log("Trigger");
-        StartCoroutine(WaitDestroy());
-        collision.gameObject.GetComponent<Rigidbody2D>().AddForce(new Vector2 (0,10), ForceMode2D.Impulse);
+        if(collision.gameObject.CompareTag(_playerName))
+        {
+            StartCoroutine(WaitDestroy());
+            collision.gameObject.GetComponent<Rigidbody2D>().AddForce(new Vector2(0, _bouncePower), ForceMode2D.Impulse);
+        }
     }
     
     IEnumerator WaitDestroy()
