@@ -54,9 +54,12 @@ public class DeerController : MonoBehaviour
 #endif
     #endregion
 
+    private Collider2D _collider = null;
+    public Collider2D Collider { get => _collider;}
     #region Private Methods
     private void Init()
     {
+        _collider = GetComponent<Collider2D>();
         var rb2D = GetComponent<Rigidbody2D>();
         _mover.Init(rb2D);
         _stateController.Init(rb2D, GetComponent<GroundCheck>(), this);
@@ -95,6 +98,7 @@ public class DeerController : MonoBehaviour
     [SerializeField]
     private bool _isWire = false;
     public bool IsWire => _isWire;
+
 
     public void StartWire()
     {

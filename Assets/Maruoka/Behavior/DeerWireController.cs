@@ -114,6 +114,7 @@ public class DeerWireController
     // サンタに向かって昇るモード
     private void ClimbToSanta()
     {
+        _deerController.Collider.enabled = false;
         // 上昇する
         _rigidbody2D.velocity = new Vector2(0f, _climbSpeed);
         // Debug.Log($"{_santaTransform.position.y - _deerTransform.position.y}"); // 高さの差確認用
