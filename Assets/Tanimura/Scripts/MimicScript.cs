@@ -11,7 +11,7 @@ public class MimicScript : MonoBehaviour
     bool _isAttack = false;
     bool _isBack = false;
     float _timer;
-    float _attackTimer = 1;
+    [SerializeField] float _attackTimer;
     [SerializeField] float _speed;
     // Start is called before the first frame update
     void Start()
@@ -48,7 +48,7 @@ public class MimicScript : MonoBehaviour
                 _timer = 0f;
                 _isBack = false;
                 _rb.velocity = new Vector2(0, 0);
-                Debug.Log("a");
+                Debug.Log("Stop");
             }
 
 
@@ -56,12 +56,15 @@ public class MimicScript : MonoBehaviour
     }
     public void Attack(Vector3 hitPos)
     {
-        _mimicPos = gameObject.transform.position;
-        _playerHitPos = hitPos;
-        _dir = (_playerHitPos - _mimicPos).normalized;
-        _isAttack = true;
-        Debug.Log(_isAttack);
-        Debug.Log(_mimicPos);
+        if (_isAttack == false && _isBack == false)
+        {
+            _mimicPos = gameObject.transform.position;
+            _playerHitPos = hitPos;
+            _dir = (_playerHitPos - _mimicPos).normalized;
+            _isAttack = true;
+            Debug.Log(_isAttack);
+            Debug.Log(_mimicPos);
+        }
 
     }
     private void OnCollisionEnter2D(Collision2D collision)
@@ -69,7 +72,7 @@ public class MimicScript : MonoBehaviour
         if (collision.gameObject.tag == "Player")
         {
             //É_ÉÅÅ[ÉWÇó^Ç¶ÇÈèàóù
-            Debug.Log("pHit");
+            Debug.Log("playerHit");
         }
     }
 }
