@@ -20,12 +20,13 @@ public class kuriboScript : MonoBehaviour
     {
         Debug.Log("Trigger");
         StartCoroutine(WaitDestroy());
+        collision.gameObject.GetComponent<Rigidbody2D>().AddForce(new Vector2 (0,10), ForceMode2D.Impulse);
     }
     
     IEnumerator WaitDestroy()
     {
         Debug.Log("w");
-        yield return new WaitForSeconds(1f);
+        yield return new WaitForSeconds(0.2f);
         Destroy(this.gameObject);
     }
 }
