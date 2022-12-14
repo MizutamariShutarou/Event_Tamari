@@ -143,7 +143,7 @@ MonoBehaviour:
     _isGodMode: 0
     _knockBackTime: 1000
   _mover:
-    _moveSpeed: 2
+    _moveSpeed: 4
     _horizontalButtonName: Horizontal
     _isRun: 0
   _wireActioner:
@@ -154,7 +154,7 @@ MonoBehaviour:
     _isReadyFlyUp: 0
     _isReadyNomal: 0
     _riseTime: 500
-    _risePower: 8
+    _risePower: 3
     _forwardPropulsion: 2
     _flyingSquirrelsGravity: -1
     _forwardCheckOffset: {x: 0.7, y: -0.11, z: 0}

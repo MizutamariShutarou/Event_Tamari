@@ -33,15 +33,18 @@ public class UnionController : MonoBehaviour
     #endregion
 
     #region Member Variables
+    private SpriteRenderer _spriteRenderer = null;
     #endregion
 
     #region Unity Methods
     private void Start()
     {
+        _spriteRenderer = GetComponent<SpriteRenderer>();
         Init();
     }
     private void Update()
     {
+        _spriteRenderer.flipX = StateController.FacingDirection == FacingDirection.LEFT;
         Process();
     }
     private void OnDrawGizmosSelected()
@@ -59,7 +62,7 @@ public class UnionController : MonoBehaviour
         _mover.Init(rb2D);
         _stateController.Init(rb2D, gc, this);
         _animationController.Init(_stateController);
-        _lifeController.Init(_mover,_stateController);
+        _lifeController.Init(_mover, _stateController);
         _shootGun.Init(transform, _stateController);
         _flyingSquirrelActioner.Init(rb2D, _stateController,
             gc, transform, _mover);

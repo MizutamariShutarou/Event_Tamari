@@ -227,7 +227,7 @@ MonoBehaviour:
     _isDrawGizmo: 1
     _attackGizmoColor: {r: 1, g: 0, b: 0.8009362, a: 1}
   _rushAttacker:
-    _fireButtonName: Fire2
+    _fireButtonName: LeftShift
     _isReadyFire: 1
     _hitboxAreaOffset: {x: 1.09, y: 0, z: 0}
     _hitboxSize: {x: 0.98, y: 0.64, z: 0.59}
@@ -249,7 +249,7 @@ MonoBehaviour:
     _isReadyChange: 0
     _buddyName: 1
   _combiner:
-    _combineButtonName: Fire3
+    _combineButtonName: Fire2
     _isReadyCanCombine: 0
   _stateController:
     _currentState: 0
@@ -259,7 +259,7 @@ MonoBehaviour:
     _coalesceDistanceX: 1
     _coalesceDistanceY: 5
     _isDrawGizmoCheckForward: 1
-    _checkForwardOffset: {x: 1.13, y: -0.22, z: 0}
+    _checkForwardOffset: {x: 1.24, y: -0.22, z: 0}
     _checkForwardSize: {x: 2.26, y: 1.07, z: 3.44}
     _targetLayer:
       serializedVersion: 2

@@ -55,10 +55,12 @@ public class DeerController : MonoBehaviour
     #endregion
 
     private Collider2D _collider = null;
-    public Collider2D Collider { get => _collider;}
+    public Collider2D Collider { get => _collider; }
+    private SpriteRenderer _spriteRenderer = null;
     #region Private Methods
     private void Init()
     {
+        _spriteRenderer = GetComponent<SpriteRenderer>();
         _collider = GetComponent<Collider2D>();
         var rb2D = GetComponent<Rigidbody2D>();
         _mover.Init(rb2D);
@@ -70,11 +72,12 @@ public class DeerController : MonoBehaviour
         _animationController.Init(_stateController);
         _combiner.Init(_stateController);
         _deerWireController.Init(rb2D,
-            OperableCharacterManager.Instance.Santa.transform,transform,this,
+            OperableCharacterManager.Instance.Santa.transform, transform, this,
             OperableCharacterManager.Instance.Santa.GetComponent<SantaController>());
     }
     private void Process()
     {
+        _spriteRenderer.flipX = StateController.FacingDirection == FacingDirection.LEFT;
         if (_isWire)
         {
             _deerWireController.Update();
