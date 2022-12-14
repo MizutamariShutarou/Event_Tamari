@@ -70,20 +70,23 @@ public class SantaStateController : StateControllerBase<SantaState>
         {
             _currentState = SantaState.TEMPORARY_DEATH;
         }
-        // ワイヤーアクション状態で投げられている状態の場合
-        if (_controller.SantaWireController.CurrentState == SantaWireState.DO_NOTHING)
+        if (_controller.IsWire)
         {
-            _currentState = SantaState.WIRE_DO_NOTHING;
-        }
-        // ワイヤーアクション状態で引きずられている状態の場合
-        if (_controller.SantaWireController.CurrentState == SantaWireState.MOVE)
-        {
-            _currentState = SantaState.WIRE_MOVE;
-        }
-        // ワイヤーアクション状態で引っかかっている状態の場合
-        if (_controller.SantaWireController.CurrentState == SantaWireState.STOP_MOVE)
-        {
-            _currentState = SantaState.WIRE_STOP_MOVE;
+            // ワイヤーアクション状態で投げられている状態の場合
+            if (_controller.SantaWireController.CurrentState == SantaWireState.DO_NOTHING)
+            {
+                _currentState = SantaState.WIRE_DO_NOTHING;
+            }
+            // ワイヤーアクション状態で引きずられている状態の場合
+            if (_controller.SantaWireController.CurrentState == SantaWireState.MOVE)
+            {
+                _currentState = SantaState.WIRE_MOVE;
+            }
+            // ワイヤーアクション状態で引っかかっている状態の場合
+            if (_controller.SantaWireController.CurrentState == SantaWireState.STOP_MOVE)
+            {
+                _currentState = SantaState.WIRE_STOP_MOVE;
+            }
         }
     }
 }

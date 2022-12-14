@@ -59,20 +59,23 @@ public class DeerStateController : StateControllerBase<DeerState>
         {
             _currentState = DeerState.RUSH_ATTACK;
         }
-        // サンタの着地・崖探し待ち
-        if (_controller.DeerWireController.CurrentState == DeerWireState.DO_NOTHING)
+        if (_controller.IsWire)
         {
-            _currentState = DeerState.WIRE_DO_NOTHING;
-        }
-        // サンタの基に移動（歩き）
-        if (_controller.DeerWireController.CurrentState == DeerWireState.WALK_TO_SANTA)
-        {
-            _currentState = DeerState.WIRE_MOVE;
-        }
-        // サンタの基に移動（ワイヤークライム）
-        if (_controller.DeerWireController.CurrentState == DeerWireState.CLIMB_TO_SANTA)
-        {
-            _currentState = DeerState.WIRE_CLIMB;
+            // サンタの着地・崖探し待ち
+            if (_controller.DeerWireController.CurrentState == DeerWireState.DO_NOTHING)
+            {
+                _currentState = DeerState.WIRE_DO_NOTHING;
+            }
+            // サンタの基に移動（歩き）
+            if (_controller.DeerWireController.CurrentState == DeerWireState.WALK_TO_SANTA)
+            {
+                _currentState = DeerState.WIRE_MOVE;
+            }
+            // サンタの基に移動（ワイヤークライム）
+            if (_controller.DeerWireController.CurrentState == DeerWireState.CLIMB_TO_SANTA)
+            {
+                _currentState = DeerState.WIRE_CLIMB;
+            }
         }
     }
 }
