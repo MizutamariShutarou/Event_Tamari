@@ -94,6 +94,7 @@ public class DeerController : MonoBehaviour
     #endregion
     [SerializeField]
     private bool _isWire = false;
+    public bool IsWire => _isWire;
 
     public void StartWire()
     {

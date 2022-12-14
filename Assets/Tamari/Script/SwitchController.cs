@@ -6,6 +6,8 @@ using UnityEngine.Events;
 [RequireComponent(typeof(BoxCollider2D))]
 public class SwitchController : GimmickBase
 {
+    [SerializeField] string _santaLayer;
+
     /// <summary>
     /// スイッチ踏んだ時
     /// </summary>
@@ -28,8 +30,11 @@ public class SwitchController : GimmickBase
     /// <param name="collision"></param>
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        Debug.Log("踏まれたので扉開く");
-        EnterFunc();
+        if(collision.gameObject.layer == LayerMask.NameToLayer(_santaLayer))
+        {
+            Debug.Log("踏まれたので扉開く");
+            EnterFunc();
+        }
     }
 
     /// <summary>
@@ -38,7 +43,10 @@ public class SwitchController : GimmickBase
     /// <param name="collision"></param>
     private void OnTriggerExit2D(Collider2D collision)
     {
-        Debug.Log("離れたので扉閉める");
-        ExitFunc();
+        if (collision.gameObject.layer == LayerMask.NameToLayer(_santaLayer))
+        {
+            Debug.Log("離れたので扉閉める");
+            ExitFunc();
+        }
     }
 }

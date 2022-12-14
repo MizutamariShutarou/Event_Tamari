@@ -102,8 +102,8 @@ Transform:
   m_GameObject: {fileID: 1742258637341970940}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
+  m_LocalScale: {x: 0.15, y: 0.15, z: 0.15}
+  m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 1685132887}
   m_Father: {fileID: 0}
@@ -150,7 +150,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 26b136caa32827e4b9e246cd2cc193df, type: 3}
+  m_Sprite: {fileID: 21300000, guid: c0bb8f17a51ecad4a8348d2a0774a047, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -194,7 +194,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b4ec99d5300b3c94e8615507232540c6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _offset: {x: 0, y: -1.28, z: 0}
+  _offset: {x: 0, y: -1.42, z: 0}
   _size: {x: 0.7, y: 0.5}
   _groundLayer:
     serializedVersion: 2
@@ -213,7 +213,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _mover:
-    _moveSpeed: 3
+    _moveSpeed: 15
     _horizontalButtonName: Horizontal
     _isReady: 0
   _hornSwordAttacker:
@@ -278,16 +278,16 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
+  m_Offset: {x: -0.1315918, y: -0.4825058}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 2.56, y: 2.56}
+    oldSize: {x: 10.804199, y: 21.8}
     newSize: {x: 1, y: 1}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 2.56, y: 2.56}
+  m_Size: {x: 8.613253, y: 19.842487}
   m_EdgeRadius: 0
