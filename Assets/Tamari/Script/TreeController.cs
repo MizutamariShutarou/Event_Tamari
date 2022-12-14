@@ -25,12 +25,16 @@ public class TreeController : GimmickBase
     /// トナカイの突進を受けた時
     /// </summary>
     /// <param name="collision"></param>
-    private void OnTriggerEnter2D(Collider2D collision)
+    private void OnTriggerStay2D(Collider2D collision)
     {
-        if(collision.gameObject.layer == LayerMask.NameToLayer("Deer"))
+        if (collision.gameObject.layer == LayerMask.NameToLayer("Deer"))
         {
-            Debug.Log("突進された");
-            EnterFunc();
+            if (collision.TryGetComponent(out DeerController deerController) &&
+                deerController.StateController.CurrentState == DeerState.RUSH_ATTACK)
+            {
+                Debug.Log("突進された");
+                EnterFunc();
+            }
         }
     }
 

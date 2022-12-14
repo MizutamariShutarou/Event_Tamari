@@ -43,10 +43,12 @@ public class SantaController : MonoBehaviour
         Process();
     }
     #endregion
+    private SpriteRenderer _spriteRenderer = null;
 
     #region Private Methods
     private void Init()
     {
+        _spriteRenderer = GetComponent<SpriteRenderer>();
         var rb2D = GetComponent<Rigidbody2D>();
         var gc = GetComponent<GroundCheck>();
         _mover.Init(rb2D, _stateControler);
@@ -61,6 +63,7 @@ public class SantaController : MonoBehaviour
     }
     private void Process()
     {
+        _spriteRenderer.flipX = StateControler.FacingDirection == FacingDirection.LEFT;
         if (_isWire)
         {
             _santaWireController.Update();

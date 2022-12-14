@@ -28,7 +28,8 @@ public abstract class StateControllerBase<T> where T : Enum
     /// </summary>
     protected void FacingDirectionUpdate()
     {
-        if (!Mathf.Approximately(_rb2D.velocity.x, 0f))
+        // if (!Mathf.Approximately(_rb2D.velocity.x, 0f))
+        if (Mathf.Abs(_rb2D.velocity.x) > 0.1f)
         {
             if (_rb2D.velocity.x > 0f)
             {
