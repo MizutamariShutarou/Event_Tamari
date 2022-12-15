@@ -119,4 +119,9 @@ public class UnionController : MonoBehaviour
         _lifeController.Damage(1, new Vector2(1, 1), 10f, 1000);
     }
     #endregion
+    // ŠO•”‚Æ‚ÌŒ‹‡•”
+    public void Damage(int damage, Vector2 dir, float power, int moveStopTime)
+    {
+        _lifeController.Damage(damage, dir, power, moveStopTime);
+    }
 }

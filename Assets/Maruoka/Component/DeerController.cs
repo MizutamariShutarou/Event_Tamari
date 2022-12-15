@@ -112,7 +112,11 @@ public class DeerController : MonoBehaviour
         this.enabled = false;
         _isWire = false;
     }
-
+    // 外部との結合部
+    public void Damage(int damage, Vector2 dir, float power, int moveStopTime)
+    {
+        _lifeController.Damage(damage, dir, power, moveStopTime);
+    }
     #region Animation Event
     // アニメーションイベントから呼び出すことを想定して作成されたメソッド群
     public void OnHornSwordAttack()

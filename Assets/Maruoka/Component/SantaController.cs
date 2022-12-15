@@ -97,6 +97,12 @@ public class SantaController : MonoBehaviour
         _isWire = false;
     }
 
+    // 外部との結合部
+    public void Damage(int damage, Vector2 dir, float power)
+    {
+        _lifeController.Damage(damage,dir,power);
+    }
+
     #region Test
 #if UNITY_EDITOR
     // テストコード群
