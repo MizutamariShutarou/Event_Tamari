@@ -11,7 +11,7 @@ public class DoorScript : MonoBehaviour
     }
 
     /// <summary>
-    /// ”à‚ªŠJ‚­
+    /// ï¿½ï¿½ï¿½ï¿½ï¿½Jï¿½ï¿½
     /// </summary>
     public void OpenDoor()
     {
@@ -20,11 +20,13 @@ public class DoorScript : MonoBehaviour
     }
 
     /// <summary>
-    /// ”à‚ª•Â‚¶‚é
+    /// ï¿½ï¿½ï¿½ï¿½ï¿½Â‚ï¿½ï¿½ï¿½
     /// </summary>
     public void CloseDoor()
     {
         _doorAnim.SetBool("DoorAnim", false);
-        //_doorAnim.SetFloat("Speed", -2);
+        //_doorAnim.SetFloat("Speed", -3);
     }
 }
+
+
