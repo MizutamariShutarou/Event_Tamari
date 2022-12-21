@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class UnionController : MonoBehaviour
 {
@@ -46,6 +47,17 @@ public class UnionController : MonoBehaviour
     {
         _spriteRenderer.flipX = StateController.FacingDirection == FacingDirection.LEFT;
         Process();
+    }
+    [TagName, SerializeField]
+    private string _goalTagName = default;
+    [SceneName, SerializeField]
+    private string _goalSceneName = default;
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.tag == _goalTagName) // ÉSÅ[ÉãÇÃÉgÉäÉKÅ[Ç…êGÇÍÇΩÇÁÉSÅ[ÉãÉVÅ[ÉìÇ÷ëJà⁄Ç∑ÇÈ
+        {
+            SceneManager.LoadScene(_goalSceneName);
+        }
     }
     private void OnDrawGizmosSelected()
     {
@@ -123,5 +135,9 @@ public class UnionController : MonoBehaviour
     public void Damage(int damage, Vector2 dir, float power, int moveStopTime)
     {
         _lifeController.Damage(damage, dir, power, moveStopTime);
+    }
+    public void ResetLife()
+    {
+        _lifeController.ResetLife();
     }
 }

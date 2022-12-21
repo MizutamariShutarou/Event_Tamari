@@ -29,7 +29,8 @@ public class ShootGunBehavior
         _transform = transform;
         _stateController = stateController;
     }
-
+    [SerializeField]
+    private int _damageValue = 1;
     public void Update()
     {
         if (IsRun())
@@ -42,12 +43,18 @@ public class ShootGunBehavior
                 Physics2D.Raycast(_transform.position, dir, _maxDistance, _targetLayer);
 
             // ターゲットに当たったら処理を実行する
-            if (hit.collider != null
-                // && hit.collider.TryGetComponent(out EnemyController enemy)
-                )
+            if (hit.collider != null)
             {
-                Debug.Log($"\"{hit.collider.name}\"に攻撃しました");
-                // enemy.Damage();
+                if (hit.collider.TryGetComponent(out EnemyMove enemyMove))
+                {
+                    enemyMove.Damage(_damageValue);
+                    Debug.Log($"\"{enemyMove.gameObject.name}\"に攻撃しました");
+                }
+                if (hit.collider.TryGetComponent(out MimicScript mimicScript))
+                {
+                    mimicScript.Damage(_damageValue);
+                    Debug.Log($"\"{mimicScript.gameObject.name}\"に攻撃しました");
+                }
             }
         }
     }
@@ -61,6 +68,6 @@ public class ShootGunBehavior
 
         _isReadyFire = result;
 
-        return result&& Input.GetButtonDown(_fireButtonName);
+        return result && Input.GetButtonDown(_fireButtonName);
     }
 }

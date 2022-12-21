@@ -55,6 +55,8 @@ public class HornSwordAttackBehavior
 
         return result && Input.GetButtonDown(_fireButtonName);
     }
+    [SerializeField]
+    private int _damageValue = 1;
     /// <summary>
     /// 攻撃処理 : <br/>
     /// アニメーションイベントから呼び出すことを想定して作成したが、<br/>
@@ -77,10 +79,16 @@ public class HornSwordAttackBehavior
         foreach (var e in collisions)
         {
             Debug.Log($"\"{e.name}\"に攻撃した");
-            //if(e.TryGetComponent(out EnemyController enemy))
-            //{
-            //    enemy.Damage();
-            //}
+            if (e.TryGetComponent(out EnemyMove enemyMove))
+            {
+                enemyMove.Damage(_damageValue);
+                Debug.Log($"\"{e.name}\"に攻撃した");
+            }
+            else if (e.TryGetComponent(out MimicScript mimicScript))
+            {
+                mimicScript.Damage(_damageValue);
+                Debug.Log($"\"{e.name}\"に攻撃した");
+            }
         }
     }
 }
