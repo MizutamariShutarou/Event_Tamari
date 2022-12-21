@@ -11,6 +11,7 @@ public class MimicScript : MonoBehaviour
     bool _isAttack = false;
     bool _isBack = false;
     float _timer;
+    Animator _animator;
     [SerializeField] float _attackTimer;
     [SerializeField] float _speed;
     [SerializeField] int _hp;
@@ -19,6 +20,7 @@ public class MimicScript : MonoBehaviour
     void Start()
     {
         _rb = GetComponent<Rigidbody2D>();
+        _animator = GetComponent<Animator>();
     }
 
     // Update is called once per frame
@@ -50,6 +52,7 @@ public class MimicScript : MonoBehaviour
                 _timer = 0f;
                 _isBack = false;
                 _rb.velocity = new Vector2(0, 0);
+                _animator.SetBool("Attack", false);
                 Debug.Log("Stop");
             }
 
@@ -64,6 +67,7 @@ public class MimicScript : MonoBehaviour
             _playerHitPos = hitPos;
             _dir = (_playerHitPos - _mimicPos).normalized;
             _isAttack = true;
+            _animator.SetBool("Attack",true);
             Debug.Log(_isAttack);
             Debug.Log(_mimicPos);
         }
