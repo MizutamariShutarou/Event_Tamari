@@ -16,6 +16,8 @@ public class MimicScript : MonoBehaviour
     [SerializeField] float _speed;
     [SerializeField] int _hp;
     [SerializeField] int _addDamage;
+    [SerializeField] float _pow;
+    [SerializeField] int _stopTime;
     // Start is called before the first frame update
     void Start()
     {
@@ -79,6 +81,18 @@ public class MimicScript : MonoBehaviour
         {
             //É_ÉÅÅ[ÉWÇó^Ç¶ÇÈèàóù
             Debug.Log("playerHit");
+            if (collision.collider.TryGetComponent(out SantaController santacontoroller))
+            {
+                santacontoroller.Damage(_addDamage,_rb.velocity,_pow);
+            }
+            if (collision.collider.TryGetComponent(out DeerController deerController))
+            {
+                deerController.Damage(_addDamage,_rb.velocity,_pow,_stopTime);
+            }
+            if (collision.collider.TryGetComponent(out UnionController unionController))
+            {
+                unionController.Damage(_addDamage,_rb.velocity,_pow,_stopTime);
+            }
         }
     }
     

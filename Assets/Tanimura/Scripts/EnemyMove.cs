@@ -8,6 +8,8 @@ public class EnemyMove : MonoBehaviour
     [SerializeField] int _addDamage;
     [SerializeField] int _hp;
     [SerializeField, TagName] string _playerName;
+    [SerializeField] float _pow;
+    [SerializeField] int _stopTime;
     float _scaleX = -1;
     Rigidbody2D _rb;
     public LayerMask Ground;
@@ -51,9 +53,22 @@ public class EnemyMove : MonoBehaviour
     }
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.gameObject.CompareTag(_playerName))
+        if (collision.gameObject.tag == "Player")
         {
-            //collision.gameObject.GetComponent<SantaController>().Damage();
+            //É_ÉÅÅ[ÉWÇó^Ç¶ÇÈèàóù
+            Debug.Log("playerHit");
+            if (collision.TryGetComponent(out SantaController santacontoroller))
+            {
+                santacontoroller.Damage(_addDamage, _rb.velocity, _pow);
+            }
+            if (collision.TryGetComponent(out DeerController deerController))
+            {
+                deerController.Damage(_addDamage, _rb.velocity, _pow, _stopTime);
+            }
+            if (collision.TryGetComponent(out UnionController unionController))
+            {
+                unionController.Damage(_addDamage, _rb.velocity, _pow, _stopTime);
+            }
         }
     }
     public void Damage(int damage)
