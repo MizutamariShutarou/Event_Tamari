@@ -11,14 +11,18 @@ public class MimicScript : MonoBehaviour
     bool _isAttack = false;
     bool _isBack = false;
     float _timer;
+    Animator _animator;
     [SerializeField] float _attackTimer;
     [SerializeField] float _speed;
     [SerializeField] int _hp;
     [SerializeField] int _addDamage;
+    [SerializeField] float _pow;
+    [SerializeField] int _stopTime;
     // Start is called before the first frame update
     void Start()
     {
         _rb = GetComponent<Rigidbody2D>();
+        _animator = GetComponent<Animator>();
     }
 
     // Update is called once per frame
@@ -50,6 +54,7 @@ public class MimicScript : MonoBehaviour
                 _timer = 0f;
                 _isBack = false;
                 _rb.velocity = new Vector2(0, 0);
+                _animator.SetBool("Attack", false);
                 Debug.Log("Stop");
             }
 
@@ -64,6 +69,7 @@ public class MimicScript : MonoBehaviour
             _playerHitPos = hitPos;
             _dir = (_playerHitPos - _mimicPos).normalized;
             _isAttack = true;
+            _animator.SetBool("Attack",true);
             Debug.Log(_isAttack);
             Debug.Log(_mimicPos);
         }
@@ -75,6 +81,18 @@ public class MimicScript : MonoBehaviour
         {
             //É_ÉÅÅ[ÉWÇó^Ç¶ÇÈèàóù
             Debug.Log("playerHit");
+            if (collision.collider.TryGetComponent(out SantaController santacontoroller))
+            {
+                santacontoroller.Damage(_addDamage,_rb.velocity,_pow);
+            }
+            if (collision.collider.TryGetComponent(out DeerController deerController))
+            {
+                deerController.Damage(_addDamage,_rb.velocity,_pow,_stopTime);
+            }
+            if (collision.collider.TryGetComponent(out UnionController unionController))
+            {
+                unionController.Damage(_addDamage,_rb.velocity,_pow,_stopTime);
+            }
         }
     }
     

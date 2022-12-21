@@ -8,12 +8,16 @@ public class SnowManBulletScript : MonoBehaviour
     [SerializeField] float _speed;
     [SerializeField] float _lifeTime;
     [SerializeField] int _dir = 1;
+    [SerializeField] int _addDamage;
+    [SerializeField] float _pow;
+    [SerializeField] int _stopTime;
+    Rigidbody2D _rb;
     //public int dir = 1;
-    
+
     void Start()
     {
-        Rigidbody2D rb = GetComponent<Rigidbody2D>();
-        rb.velocity = Vector2.right * _speed * _dir;
+        _rb = GetComponent<Rigidbody2D>();
+        _rb.velocity = Vector2.right * _speed * _dir;
     }
 
     // Update is called once per frame
@@ -22,8 +26,24 @@ public class SnowManBulletScript : MonoBehaviour
         
         Destroy(this.gameObject, _lifeTime);
     }
-    private void OnCollisionEnter2D(Collision2D collision)
+    private void OnTriggerEnter2D(Collider2D collision)
     {
-        //ダメージを与える処理を後で書く
+        if (collision.gameObject.tag == "Player")
+        {
+            //ダメージを与える処理
+            Debug.Log("playerHit");
+            if (collision.TryGetComponent(out SantaController santacontoroller))
+            {
+                santacontoroller.Damage(_addDamage, _rb.velocity, _pow);
+            }
+            if (collision.TryGetComponent(out DeerController deerController))
+            {
+                deerController.Damage(_addDamage, _rb.velocity, _pow, _stopTime);
+            }
+            if (collision.TryGetComponent(out UnionController unionController))
+            {
+                unionController.Damage(_addDamage, _rb.velocity, _pow, _stopTime);
+            }
+        }
     }
 }
