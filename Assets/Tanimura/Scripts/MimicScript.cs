@@ -13,6 +13,8 @@ public class MimicScript : MonoBehaviour
     float _timer;
     [SerializeField] float _attackTimer;
     [SerializeField] float _speed;
+    [SerializeField] int _hp;
+    [SerializeField] int _addDamage;
     // Start is called before the first frame update
     void Start()
     {
@@ -73,6 +75,15 @@ public class MimicScript : MonoBehaviour
         {
             //ƒ_ƒ[ƒW‚ğ—^‚¦‚éˆ—
             Debug.Log("playerHit");
+        }
+    }
+    
+    public void Damage(int damage)
+    {
+        _hp -= damage;
+        if(_hp <= 0)
+        {
+            Destroy(gameObject);
         }
     }
 }
