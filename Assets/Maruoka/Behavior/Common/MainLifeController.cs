@@ -2,14 +2,13 @@ using System;
 using System.Threading;
 using System.Threading.Tasks;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 [System.Serializable]
 public class MainLifeController
 {
     [SerializeField]
     private bool _isGodMode = false;
-    [SerializeField]
-    private int _knockBackTime = 1000;
 
     private static int _life = CommonConstant.MAX_LIFE;
 
@@ -33,16 +32,20 @@ public class MainLifeController
         _life = CommonConstant.MAX_LIFE;
     }
 
-    public void Damage(int damage, Vector2 dir, float power, int moveStopTime)
+    [SceneName, SerializeField]
+    private string _gameOverSceneName = default;
+    public void Damage(int damage, Vector2 dir, float power, int knockBackTime)
     {
         if (!_isGodMode)
         {
-            StartKnockBack();
+            StartKnockBack(knockBackTime);
             if (_life < 0)
             {
                 Debug.LogWarning("Playerが倒されました");
                 StateUpdateOnDamage();
                 _isDeath = true;
+                // フェード等行う場合この行に処理を追加する。
+                SceneManager.LoadScene(_gameOverSceneName);
             }
             else
             {
@@ -53,7 +56,7 @@ public class MainLifeController
             // ノックバックする
             _rb2D.velocity = Vector2.zero;
             _rb2D.AddForce(dir.normalized * power, ForceMode2D.Impulse);
-            _mover.StopMove(moveStopTime);
+            _mover.StopMove(knockBackTime);
         }
     }
     protected virtual void StateUpdateOnDeath()
@@ -64,11 +67,11 @@ public class MainLifeController
     {
 
     }
-    private async void StartKnockBack()
+    private async void StartKnockBack(int knockBackTime)
     {
         _isGodMode = true;
         _isDamage = true;
-        await Task.Run(() => Thread.Sleep(_knockBackTime));
+        await Task.Run(() => Thread.Sleep(knockBackTime));
         _isGodMode = false;
         _isDamage = false;
     }

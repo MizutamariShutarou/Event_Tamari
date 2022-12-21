@@ -1,10 +1,12 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 [RequireComponent(typeof(Rigidbody2D))]
 public class SantaController : MonoBehaviour
 {
+
     #region Inspector Variables
     [SerializeField]
     private SantaMoveBehavior _mover = default;
@@ -41,6 +43,17 @@ public class SantaController : MonoBehaviour
     private void Update()
     {
         Process();
+    }
+    [TagName, SerializeField]
+    private string _goalTagName = default;
+    [SceneName, SerializeField]
+    private string _goalSceneName = default;
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.tag == _goalTagName) // ƒS[ƒ‹‚ÌƒgƒŠƒK[‚ÉG‚ê‚½‚çƒS[ƒ‹ƒV[ƒ“‚Ö‘JˆÚ‚·‚é
+        {
+            SceneManager.LoadScene(_goalSceneName);
+        }
     }
     #endregion
     private SpriteRenderer _spriteRenderer = null;
@@ -100,7 +113,7 @@ public class SantaController : MonoBehaviour
     // ŠO•”‚Æ‚ÌŒ‹‡•”
     public void Damage(int damage, Vector2 dir, float power)
     {
-        _lifeController.Damage(damage,dir,power);
+        _lifeController.Damage(damage, dir, power);
     }
 
     #region Test

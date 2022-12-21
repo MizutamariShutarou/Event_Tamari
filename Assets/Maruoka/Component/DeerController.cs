@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class DeerController : MonoBehaviour
 {
@@ -43,6 +44,17 @@ public class DeerController : MonoBehaviour
     private void Update()
     {
         Process();
+    }
+    [TagName, SerializeField]
+    private string _goalTagName = default;
+    [SceneName, SerializeField]
+    private string _goalSceneName = default;
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.tag == _goalTagName) // ゴールのトリガーに触れたらゴールシーンへ遷移する
+        {
+            SceneManager.LoadScene(_goalSceneName);
+        }
     }
 #if UNITY_EDITOR
     private void OnDrawGizmosSelected()
@@ -117,6 +129,10 @@ public class DeerController : MonoBehaviour
     {
         _lifeController.Damage(damage, dir, power, moveStopTime);
     }
+    public void ResetLife()
+    {
+        _lifeController.ResetLife();
+    }
     #region Animation Event
     // アニメーションイベントから呼び出すことを想定して作成されたメソッド群
     public void OnHornSwordAttack()
@@ -125,7 +141,7 @@ public class DeerController : MonoBehaviour
     }
     #endregion
 
-    #region Test
+    #region Debug
 #if UNITY_EDITOR
     // テストコード群
     private void OnDrawGizmo_HornSwordAttackHitBox()

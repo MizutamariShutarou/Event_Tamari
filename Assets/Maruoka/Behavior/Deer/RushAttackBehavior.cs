@@ -90,6 +90,8 @@ public class RushAttackBehavior
 
         return result && Input.GetButtonDown(_fireButtonName);
     }
+    [SerializeField]
+    private int _damageValue = 1;
     /// <summary>
     /// ヒット処理
     /// </summary>
@@ -111,11 +113,14 @@ public class RushAttackBehavior
         foreach (var e in collisions)
         {
             Debug.Log($"\"{e.name}\"がOverlapBoxに進入した");
-            //if(e.TryGetComponent(out EnemyController enemy))
-            //{
-            //    Debug.Log($"\"{e.name}\"に攻撃した");
-            //    enemy.Damage();
-            //}
+            if(e.TryGetComponent(out EnemyMove enemyMove))
+            {
+                enemyMove.Damage(_damageValue);
+            }
+            else if(e.TryGetComponent (out MimicScript mimicScript))
+            {
+                mimicScript.Damage(_damageValue);
+            }
 
             // ギミックに対しては、ギミックの方から処理を行うので記述する必要無し。
         }
