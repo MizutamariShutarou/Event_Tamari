@@ -5,6 +5,9 @@ using UnityEngine;
 public class EnemyMove : MonoBehaviour
 {
     [SerializeField] float _speed;
+    [SerializeField] int _addDamage;
+    [SerializeField] int _hp;
+    [SerializeField, TagName] string _playerName;
     float _scaleX = -1;
     Rigidbody2D _rb;
     public LayerMask Ground;
@@ -45,5 +48,20 @@ public class EnemyMove : MonoBehaviour
         _scaleX = _scaleX * -1;
         gameObject.transform.localScale = _scale;
         Debug.Log("Change");
+    }
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.gameObject.CompareTag(_playerName))
+        {
+            //collision.gameObject.GetComponent<SantaController>().Damage();
+        }
+    }
+    public void Damage(int damage)
+    {
+        _hp -= damage;
+        if (_hp <= 0)
+        {
+            Destroy(gameObject);
+        }
     }
 }
