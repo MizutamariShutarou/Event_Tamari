@@ -46,7 +46,7 @@ public class SwitchController : GimmickBase
         if (collision.gameObject.layer == LayerMask.NameToLayer(_santaLayer))
         {
             Debug.Log("—£‚ê‚½‚Ì‚Å”à•Â‚ß‚é");
-            ExitFunc();
+            //ExitFunc();
         }
     }
 }
