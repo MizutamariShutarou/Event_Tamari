@@ -149,7 +149,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 10
   m_Sprite: {fileID: 21300000, guid: c0bb8f17a51ecad4a8348d2a0774a047, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -226,6 +226,7 @@ MonoBehaviour:
       m_Bits: 512
     _isDrawGizmo: 1
     _attackGizmoColor: {r: 1, g: 0, b: 0.8009362, a: 1}
+    _damageValue: 1
   _rushAttacker:
     _fireButtonName: LeftShift
     _isReadyFire: 1
@@ -241,9 +242,10 @@ MonoBehaviour:
     _rushTime: 2
     _easeType: 1
     _rushSpeed: 0
+    _damageValue: 1
   _lifeController:
-    _isGodMode: 0
-    _knockBackTime: 1000
+    _isGodMode: 1
+    _gameOverSceneName: TitleScene
   _operatCharacterChanger:
     _changeButtonName: Cancel
     _isReadyChange: 0
@@ -264,6 +266,8 @@ MonoBehaviour:
     _targetLayer:
       serializedVersion: 2
       m_Bits: 776
+  _goalTagName: 
+  _goalSceneName: TitleScene
   _isWire: 0
 --- !u!61 &6425274505885325219
 BoxCollider2D:

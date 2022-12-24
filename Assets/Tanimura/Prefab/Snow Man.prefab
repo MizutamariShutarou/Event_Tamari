@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 5631829963217100144}
   - component: {fileID: 5631829963217100145}
   - component: {fileID: 5631829963217100146}
+  - component: {fileID: 1875005878}
   m_Layer: 0
   m_Name: Snow Man
   m_TagString: Untagged
@@ -30,7 +31,7 @@ Transform:
   m_GameObject: {fileID: 5631829963217100148}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: -2.41, z: 0}
-  m_LocalScale: {x: 0.2, y: 0.2, z: 0.2}
+  m_LocalScale: {x: 0.15, y: 0.15, z: 0.15}
   m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 5631829963581460881}
@@ -104,7 +105,8 @@ MonoBehaviour:
   _muzzle: {fileID: 5631829963581460880}
   _rightBullet: {fileID: 4808882625202837365, guid: 8ed6e754fb83941428f950ccd37ba7da, type: 3}
   _leftBullet: {fileID: 355642840564877498, guid: 1249d6b262106ca4196ea55c3aed7600, type: 3}
-  _interval: 3.33
+  _interval: 10
+  _bouncePower: 1
 --- !u!114 &5631829963217100144
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -118,6 +120,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _speed: 1
+  _addDamage: 1
+  _hp: 3
+  _playerName: Player
+  _pow: 1
+  _stopTime: 1
   Ground:
     serializedVersion: 2
     m_Bits: 520
@@ -168,6 +175,32 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 6.1127973, y: 14.711596}
   m_EdgeRadius: 0
+--- !u!61 &1875005878
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5631829963217100148}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: -0.4, y: 7.34}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0.5, y: 0.5}
+    oldSize: {x: 12, y: 16}
+    newSize: {x: 1, y: 1}
+    adaptiveTilingThreshold: 0.5
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 3.51, y: 3.7}
+  m_EdgeRadius: 0
 --- !u!1 &5631829963581460880
 GameObject:
   m_ObjectHideFlags: 0
@@ -184,7 +217,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &5631829963581460881
 Transform:
   m_ObjectHideFlags: 0

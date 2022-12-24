@@ -10,8 +10,8 @@ public class UnionController : MonoBehaviour
     private UnionMainLifeController _lifeController = default;
     [SerializeField]
     private UnionMoveController _mover = default;
-    [SerializeField]
-    private WireAction _wireActioner = default;
+    //[SerializeField]
+    //private WireAction _wireActioner = default;
     [SerializeField]
     private FlyingSquirrelAction _flyingSquirrelActioner = default;
     [SerializeField]
@@ -25,7 +25,7 @@ public class UnionController : MonoBehaviour
 
     public UnionMainLifeController LifeController => _lifeController;
     public UnionMoveController Mover => _mover;
-    public WireAction WireActioner => _wireActioner;
+    //public WireAction WireActioner => _wireActioner;
     public FlyingSquirrelAction FlyingSquirrelActioner => _flyingSquirrelActioner;
     public ShootGunBehavior ShootGun => _shootGun;
     public SeparationInstruction SeparationInstructioner => _separationInstructioner;
@@ -46,7 +46,10 @@ public class UnionController : MonoBehaviour
     private void Update()
     {
         _spriteRenderer.flipX = StateController.FacingDirection == FacingDirection.LEFT;
-        Process();
+        if(!GoalManager.IsGoaled)
+        {
+            Process();
+        }
     }
     [TagName, SerializeField]
     private string _goalTagName = default;
@@ -79,12 +82,12 @@ public class UnionController : MonoBehaviour
         _flyingSquirrelActioner.Init(rb2D, _stateController,
             gc, transform, _mover);
         _separationInstructioner.Init(gameObject, _stateController);
-        _wireActioner.Init(_stateController);
+        //_wireActioner.Init(_stateController);
     }
     private void Process()
     {
         _mover.Update();
-        _wireActioner.Update();
+        //_wireActioner.Update();
         _shootGun.Update();
         _flyingSquirrelActioner.Update();
         _stateController.Update();

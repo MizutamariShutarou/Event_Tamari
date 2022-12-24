@@ -31,9 +31,9 @@ public class PresentPresenter : MonoBehaviour
     {
         _model.ResetNum();
     }
-    public void BoolChange()
+    public bool BoolChange()
     {
-        _model.BoolChange();
+        return _model.BoolChange();
     }
 
     public void ActivePresent()

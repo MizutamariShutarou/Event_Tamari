@@ -91,11 +91,11 @@ public class SantaController : MonoBehaviour
         _stateControler.Update();
         _animationController.Update();
     }
-    private void OnDrawGizmosSelected()
-    {
-        OnDrawGizmo_WireActionFrontCheckBox();
-        OnDrawGizmo_WireActionCliffCheckBox();
-    }
+    //private void OnDrawGizmosSelected()
+    //{
+    //    OnDrawGizmo_WireActionFrontCheckBox();
+    //    OnDrawGizmo_WireActionCliffCheckBox();
+    //}
     #endregion
     [SerializeField]
     private bool _isWire = false;
