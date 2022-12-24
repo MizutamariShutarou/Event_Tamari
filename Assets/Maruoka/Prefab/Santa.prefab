@@ -149,7 +149,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 10
   m_Sprite: {fileID: 21300000, guid: d06ad50ee2e530d4da5778e28bda16d2, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -179,13 +179,13 @@ MonoBehaviour:
     _crawlingSpeed: 0.5
     _isRun: 0
   _jumper:
-    _jumpPower: 8
+    _jumpPower: 10
     _jumpButtonName: Jump
     _isReady: 0
   _lifeController:
-    _maxLife: 1
-    _life: 1
-    _isGodMode: 0
+    _maxLife: 100
+    _life: 100
+    _isGodMode: 1
     _knockBackTime: 1000
     _deathTime: 3000
   _operatCharacterChanger:
@@ -216,6 +216,8 @@ MonoBehaviour:
     _maxDistanceY: 1
     _isDrawGizmoCheckCliff: 1
     _currentState: 0
+  _goalTagName: 
+  _goalSceneName: TitleScene
   _isWire: 0
 --- !u!50 &3805936245956139283
 Rigidbody2D:

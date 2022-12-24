@@ -69,6 +69,7 @@ public class EnemyMove : MonoBehaviour
             {
                 unionController.Damage(_addDamage, _rb.velocity, _pow, _stopTime);
             }
+            
         }
     }
     public void Damage(int damage)

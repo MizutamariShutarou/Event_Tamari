@@ -47,9 +47,10 @@ public class PresentModel : MonoBehaviour
         CurrentNum = 0;
     }
 
-    public void BoolChange()
+    public bool BoolChange()
     {
         _isAll = true;
         Debug.Log(_isAll);
+        return _isAll;
     }
 }

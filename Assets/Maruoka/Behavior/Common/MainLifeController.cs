@@ -45,7 +45,7 @@ public class MainLifeController
                 StateUpdateOnDamage();
                 _isDeath = true;
                 // フェード等行う場合この行に処理を追加する。
-                SceneManager.LoadScene(_gameOverSceneName);
+                //SceneManager.LoadScene(_gameOverSceneName);
             }
             else
             {

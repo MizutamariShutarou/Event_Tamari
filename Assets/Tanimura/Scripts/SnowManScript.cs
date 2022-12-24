@@ -9,6 +9,7 @@ public class SnowManScript : MonoBehaviour
     [SerializeField] GameObject _rightBullet;
     [SerializeField] GameObject _leftBullet;
     [SerializeField] float _interval;
+    [SerializeField] float _bouncePower = 1f;
     float _timer;
     float _scaleX;
     void Start()
@@ -38,6 +39,20 @@ public class SnowManScript : MonoBehaviour
         else
         {
             Instantiate(_leftBullet, this.transform.position, Quaternion.identity);
+        }
+    }
+    IEnumerator WaitDestroy()
+    {
+        Debug.Log("w");
+        yield return new WaitForSeconds(0.2f);
+        Destroy(this.gameObject);
+    }
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.gameObject.CompareTag("Player"))
+        {
+            StartCoroutine(WaitDestroy());
+            collision.gameObject.GetComponent<Rigidbody2D>().AddForce(new Vector2(0, _bouncePower), ForceMode2D.Impulse);
         }
     }
 }
